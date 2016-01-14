@@ -20,8 +20,7 @@ public class UserRepository {
 		 
 	    if (entity.getId() != null && !em.contains(entity)) {
 	      entity = em.merge(entity);
-	    } 
-		else {
+	    } else {
 	      em.persist(entity);
 	    }
 	    em.flush();
