@@ -16,6 +16,7 @@ public class User {
 	private String lname;
 	private String username;
 	private String biography;
+	
 	private String image;
 	
 	public User(){
