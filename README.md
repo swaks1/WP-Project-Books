@@ -1,4 +1,4 @@
-# WP-Project-Books
+# WP-Project-Books/
 Prva Verzija
 
 Proekt po WebProgramiranje 
