@@ -1,4 +1,4 @@
 /target/
 
 
-src/main/resources/spring/data-access.properties
+src\main\resources\spring\data-access.properties
