@@ -1,7 +1,11 @@
 package mk.finki.wp.persistance;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +33,7 @@ public class UserRepository {
 	    em.flush();
 	    return entity;
 	  }
-	 
+	 	//za test
 	 @Transactional
 	  public Book saveOrUpdateBook(Book entity) {
 		 
@@ -41,7 +45,7 @@ public class UserRepository {
 	    em.flush();
 	    return entity;
 	  }
-	 
+	 	//za test
 	 @Transactional
 	  public Genre saveOrUpdateZanr(Genre entity) {
 		 
@@ -53,6 +57,7 @@ public class UserRepository {
 	    em.flush();
 	    return entity;
 	  }
+	 //za test
 	 @Transactional
 	  public Author saveOrUpdateAuthor(Author entity) {
 		 
@@ -64,5 +69,15 @@ public class UserRepository {
 	    em.flush();
 	    return entity;
 	  }
+	 	//za test
+	 public Genre findGenreById(Long id){
+			TypedQuery<Genre> query = em.createQuery("SELECT b FROM Genre b WHERE b.id=?1"
+									,Genre.class);
+			query.setParameter(1, id);
+			Genre result = query.getSingleResult();
+			return result;
+		}
+	 
+	 
 
 }
