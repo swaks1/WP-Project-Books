@@ -33,11 +33,11 @@ public class TestController {
 		author.setName("Agata");
 		author.setSurname("Kristi");
 		author.setBiography("Si ziveela nekade");
-		author=userRepo.saveOrUpdateAuthor(author);
+	//	author=userRepo.saveOrUpdateAuthor(author);
 		
 		Genre genre = new Genre();
 		genre.setGenreName("Drama");
-		genre = userRepo.saveOrUpdateZanr(genre);
+		//genre = userRepo.saveOrUpdateZanr(genre);
 		List<Genre>gList = new ArrayList<Genre>();
 		gList.add(genre);
 		
@@ -46,7 +46,7 @@ public class TestController {
 		book.setDesciption("Neso se desavat");
 		book.setAuthor(author);
 		book.setGenres(gList);
-		book = userRepo.saveOrUpdateBook(book);
+	//	book = userRepo.saveOrUpdateBook(book);
 		List<Book>bList = new ArrayList<Book>();
 		bList.add(book);
 
