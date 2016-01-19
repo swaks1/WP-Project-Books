@@ -27,7 +27,7 @@ public class Book {
 	private String description;
 	private String image;
 	
-	@ManyToOne
+	@ManyToOne()
 	private Author author;
 
 	@ManyToMany(fetch=FetchType.EAGER)

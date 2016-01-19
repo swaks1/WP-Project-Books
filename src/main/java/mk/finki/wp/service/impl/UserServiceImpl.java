@@ -1,5 +1,6 @@
 package mk.finki.wp.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ public class UserServiceImpl implements UserService {
 	
 	
 	@Override
-	public List<User> getUsersByName(String fname) {
+	public List<User> findUsersByName(String fname) {
 		return userRepo.findByName(fname);
 	}
 
 	@Override
-	public User getUserById(Long id) {
+	public User findUserById(Long id) {
 		return userRepo.getById(User.class, id);
 	}
 
@@ -31,6 +32,30 @@ public class UserServiceImpl implements UserService {
 	public User saveOrUpdateUser(User user) {
 		
 		return userRepo.saveOrUpdate(user);
+	}
+
+	@Override
+	public User addGenre(User user,Genre genre) {
+		if(user.getGenres() == null){
+			user.setGenres(new ArrayList<Genre>());
+		}
+		user.addGenre(genre);
+		user=saveOrUpdateUser(user);
+		return user;
+	}
+
+	@Override
+	public User createUser(String fname, String lname, String username, String password, String biography,
+			String image) {
+		User user = new User();
+		user.setBiography(biography);
+		user.setFname(fname);
+		user.setImage(image);
+		user.setLname(lname);
+		user.setPassword(password);
+		user.setUsername(username);
+		
+		return user;
 	}
 
 

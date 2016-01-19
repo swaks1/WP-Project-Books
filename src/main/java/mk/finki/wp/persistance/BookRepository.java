@@ -57,8 +57,9 @@ public class BookRepository {
 	}
 	
 	public List<Book> findAllBooksByAuthor(Author author){
-		TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.author = author"
+		TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.author=?1"
 								,Book.class);
+		query.setParameter(1, author);
 		List <Book> results = query.getResultList();
 		return results;
 	}

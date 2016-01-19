@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mk.finki.wp.model.Genre;
+import mk.finki.wp.model.User;
 import mk.finki.wp.persistance.GenreRepository;
+import mk.finki.wp.persistance.UserRepository;
 import mk.finki.wp.service.GenreService;
+
 
 @Service
 public class GenreServiceImpl implements GenreService {
@@ -21,10 +24,8 @@ public class GenreServiceImpl implements GenreService {
 	}
 
 	@Override
-	public Genre saveOrUpdateGenre(String genreName) {
-		Genre g =  new Genre();
-		g.setGenreName(genreName);
-		return genreRepo.saveOrUpdate(g);
+	public Genre saveOrUpdateGenre(Genre genre) {
+		return genreRepo.saveOrUpdate(genre);
 		
 	}
 
@@ -39,5 +40,24 @@ public class GenreServiceImpl implements GenreService {
 		
 		return null;
 	}
+
+	@Override
+	public Genre findById(Long id) {
+		return genreRepo.findByID(Genre.class, id);
+	}
+
+	@Override
+	public Genre createGenre(String genreName) {
+		Genre genre = new Genre();
+		genre.setGenreName(genreName);
+		return genre;
+	}
+
+	@Override
+	public List<Genre> findAllGenresOfUser(User user) {
+		return user.getGenres();
+	}
+
+
 
 }

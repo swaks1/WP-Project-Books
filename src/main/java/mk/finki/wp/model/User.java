@@ -2,14 +2,6 @@ package mk.finki.wp.model;
 
 import java.util.List;
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -27,7 +19,7 @@ public class User {
 	private String biography;
 	private String image;
 	
-	 @ManyToMany
+	 @ManyToMany(fetch=FetchType.EAGER)
      @JoinTable(
          name="User_Genre",
          joinColumns = @JoinColumn( name="user_id"),
@@ -97,6 +89,10 @@ public class User {
 
 	public void setGenres(List<Genre> genres) {
 		this.genres = genres;
+	}
+	
+	public void addGenre(Genre genre){
+		this.genres.add(genre);
 	}
 	
 

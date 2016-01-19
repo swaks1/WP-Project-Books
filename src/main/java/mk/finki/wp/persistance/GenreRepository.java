@@ -34,7 +34,7 @@ public class GenreRepository {
 	    return entity;
 	  }
 	
-	public <T> T getById(Class<T> type, Long id) {
+	public <T> T findByID(Class<T> type, Long id) {
 	    CriteriaBuilder cb = em.getCriteriaBuilder();
 	    CriteriaQuery<T> cq = cb.createQuery(type);
 	    final Root<T> root = cq.from(type);

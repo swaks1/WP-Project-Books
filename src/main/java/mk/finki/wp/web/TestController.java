@@ -22,6 +22,9 @@ import mk.finki.wp.persistance.AuthorRepository;
 import mk.finki.wp.persistance.UserRepository;
 import mk.finki.wp.service.AuthorService;
 import mk.finki.wp.service.BookService;
+import mk.finki.wp.service.impl.AuthorServiceImpl;
+import mk.finki.wp.service.impl.BookServiceImpl;
+import mk.finki.wp.service.impl.GenreServiceImpl;
 import mk.finki.wp.service.impl.UserServiceImpl;
 
 
@@ -31,13 +34,16 @@ import mk.finki.wp.service.impl.UserServiceImpl;
 public class TestController {
 	
 	@Autowired
-	UserRepository userRepo; //staveno za test
+	UserServiceImpl userService; 
 	
 	@Autowired
-	AuthorService authorService;
+	AuthorServiceImpl authorService;
 	
 	@Autowired
-	BookService bookService;
+	BookServiceImpl bookService;
+	
+	@Autowired
+	GenreServiceImpl genreService;
 	
 	
 	Random rand = new Random();
@@ -65,34 +71,80 @@ public class TestController {
 		printJson(book);
 			
 		//stavanje na genre vo baza i bo nekoja  kniga
-		Genre genre = new Genre();
-		genre.setGenreName("Drama");
-		//genre = userRepo.saveOrUpdateZanr(genre);
-		List<Genre>gList = new ArrayList<Genre>();
-		gList.add(genre);
 		
-		List<Book>bList = new ArrayList<Book>();
-		bList.add(book);
-
-		genre.setGenreName("rok");
-	//	genre=userRepo.saveOrUpdateZanr(genre);
+		Genre genre = genreService.createGenre("nekoeGenre");
+		genre = genreService.saveOrUpdateGenre(genre);
 		book = bookService.addGenre(book, genre);
+		
+		genre = genreService.createGenre("rok");
+		genre = genreService.saveOrUpdateGenre(genre);
+		book = bookService.addGenre(book, genre);
+		
 			//stavanje na genre vo baza i bo nekoja  kniga
-		genre = new Genre();
-		genre.setGenreName("komedija");
-	//	genre=userRepo.saveOrUpdateZanr(genre);
+		genre = genreService.createGenre("komedija");
+		genre = genreService.saveOrUpdateGenre(genre);
 		book = bookService.addGenre(book, genre);
 			
 		
 				//site knigi koi sodzat genre komedija vo slucajov
 		List<Book> knigiSoGenre = bookService.findAllBooksByGenre(genre);
-		
 		printJson(knigiSoGenre);
 		
-	
-		return new ResponseEntity<Object>(book,HttpStatus.OK);
+		
+			//site knigi od daden avtor
+		author = authorService.findAuthorById(1L);
+		List<Book> knigiOdAuthor  = bookService.findAllBooksByAuthor(author);
+		printJson(knigiOdAuthor);
+		
+			//site genrovi od baza
+		List<Genre>allGenres = genreService.findAllGenres();
+		printJson(allGenres);
+		
+			//genre so ID
+		genre = genreService.findById(2L);
+		printJson(genre);
+			//genre po iMe
+		genre = genreService.findByName("rok");
+		printJson(genre);
+		
+		return new ResponseEntity<Object>(knigiSoGenre,HttpStatus.OK);
 	}
 	
+	@RequestMapping("/test2")
+	public ResponseEntity<Object> getObj2(){
+		Genre genre1 = genreService.findById(1L);
+		Genre genre2 = genreService.findById(2L);
+		Genre genre3 = genreService.findById(3L);
+		
+		User userNov = userService.createUser("Riste", "Poposki", "Swaks",
+				"riste2123", "biobibobio", "nema");
+		userService.addGenre(userNov, genre1);
+		userService.addGenre(userNov, genre2);
+		userService.saveOrUpdateUser(userNov);
+		
+		User userNov2 = userService.createUser("Marija", "Todororva", "Mare",
+				"marija283", "biobibobio", "ubavaSlika");
+		userService.addGenre(userNov2, genre3);
+		userService.addGenre(userNov2, genre1);
+		userService.saveOrUpdateUser(userNov2);
+		
+		User userNov3 = userService.createUser("Riste", "P", "R",
+				"R2", "sd", "ww");
+		userService.addGenre(userNov3, genre3);
+		userService.saveOrUpdateUser(userNov3);
+
+		List<User> usersByName = userService.findUsersByName("Riste");
+		printJson(usersByName);
+		
+		User userById = userService.findUserById(2L);
+		printJson(userById);
+		
+		User user5 =userService.findUserById(2L);
+		List<Genre> genresOfUser = genreService.findAllGenresOfUser(user5);
+		printJson(genresOfUser);
+	
+		return new ResponseEntity<Object>(userById,HttpStatus.OK);
+	}
 	
 	
 	
