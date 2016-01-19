@@ -23,8 +23,8 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String topic;
-	private String desciption;
+	private String title;
+	private String description;
 	private String image;
 	
 	@ManyToOne
@@ -45,20 +45,20 @@ public class Book {
 		this.id = id;
 	}
 
-	public String getTopic() {
-		return topic;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTopic(String topic) {
-		this.topic = topic;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getDesciption() {
-		return desciption;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesciption(String desciption) {
-		this.desciption = desciption;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getImage() {
@@ -83,6 +83,19 @@ public class Book {
 
 	public void setGenres(List<Genre> genres) {
 		this.genres = genres;
+	}
+	public void addGenre(Genre genre){
+		this.genres.add(genre);
+	}
+
+	public boolean hasGenre(String genreName) {
+		if(genres != null){
+			for(Genre genre : genres){
+				if(genre.getGenreName().equals(genreName))
+					return true;
+			}
+		}
+		return false;
 	}
 	
 
