@@ -1,5 +1,6 @@
 package mk.finki.wp.model;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
@@ -18,8 +19,12 @@ public class User {
 	private String password;
 	private String biography;
 	private String image;
+	@Temporal(TemporalType.DATE)
+	private Date dateCreated;
 	
-	 @ManyToMany(fetch=FetchType.EAGER)
+
+
+	@ManyToMany(fetch=FetchType.EAGER)
      @JoinTable(
          name="User_Genre",
          joinColumns = @JoinColumn( name="user_id"),
@@ -93,6 +98,14 @@ public class User {
 	
 	public void addGenre(Genre genre){
 		this.genres.add(genre);
+	}
+	
+	 public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 	
 

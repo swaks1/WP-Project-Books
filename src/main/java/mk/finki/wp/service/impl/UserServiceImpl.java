@@ -1,6 +1,7 @@
 package mk.finki.wp.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,7 @@ public class UserServiceImpl implements UserService {
 		user.setLname(lname);
 		user.setPassword(password);
 		user.setUsername(username);
+		user.setDateCreated(new Date());
 		
 		return user;
 	}

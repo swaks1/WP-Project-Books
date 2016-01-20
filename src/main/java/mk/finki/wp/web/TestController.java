@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mk.finki.wp.model.Author;
 import mk.finki.wp.model.Book;
+import mk.finki.wp.model.FavBook;
 import mk.finki.wp.model.User;
 import mk.finki.wp.model.Genre;
 import mk.finki.wp.persistance.AuthorRepository;
@@ -24,6 +25,7 @@ import mk.finki.wp.service.AuthorService;
 import mk.finki.wp.service.BookService;
 import mk.finki.wp.service.impl.AuthorServiceImpl;
 import mk.finki.wp.service.impl.BookServiceImpl;
+import mk.finki.wp.service.impl.FavBookServiceImpl;
 import mk.finki.wp.service.impl.GenreServiceImpl;
 import mk.finki.wp.service.impl.UserServiceImpl;
 
@@ -45,9 +47,13 @@ public class TestController {
 	@Autowired
 	GenreServiceImpl genreService;
 	
+	@Autowired
+	FavBookServiceImpl favBookService;
+	
 	
 	Random rand = new Random();
 	
+		//test za Books ,Genres i Authors
 	@RequestMapping("/test")
 	public ResponseEntity<Object> getObj(){
 		
@@ -109,7 +115,7 @@ public class TestController {
 		
 		return new ResponseEntity<Object>(knigiSoGenre,HttpStatus.OK);
 	}
-	
+		//test za USERS
 	@RequestMapping("/test2")
 	public ResponseEntity<Object> getObj2(){
 		Genre genre1 = genreService.findById(1L);
@@ -136,17 +142,40 @@ public class TestController {
 		List<User> usersByName = userService.findUsersByName("Riste");
 		printJson(usersByName);
 		
-		User userById = userService.findUserById(2L);
+		User userById = userService.findUserById(16L);
 		printJson(userById);
 		
-		User user5 =userService.findUserById(2L);
+		User user5 =userService.findUserById(16L);
 		List<Genre> genresOfUser = genreService.findAllGenresOfUser(user5);
 		printJson(genresOfUser);
 	
 		return new ResponseEntity<Object>(userById,HttpStatus.OK);
 	}
 	
+	//test za FavBook
+	@RequestMapping("/test3")
+	public ResponseEntity<Object> getObj3(){
+		User user1 = userService.findUserById(20L);
+		Book book1 = bookService.findBookById(10L);
+		Book book2 = bookService.findBookById(11L);
+		Book book3 = bookService.findBookById(9L);
+		
+		FavBook favBook1 = favBookService.createFavBook(user1, book1);
+		favBook1 = favBookService.createFavBook(user1, book2);
+		favBook1 = favBookService.createFavBook(user1, book3);
+			
 	
+		//all Books from USER
+		List<Book> favBookByUser =favBookService.findAllBooksByUser(user1);
+		printJson(favBookByUser);
+		
+		//all favBooks in BASE
+		 List<FavBook> allFavBooks = favBookService.findAllFavBooks();	
+		 printJson(allFavBooks);
+		 
+		 favBookService.deleteFavBook(user1, book1);
+		return new ResponseEntity<Object>(favBookByUser,HttpStatus.OK);
+	}
 	
 		//printanje na JAVA objekt vo JSON vo consola....
 	public void printJson(Object obj){
