@@ -13,5 +13,6 @@ public interface UserService {
 	public User addGenre(User user,Genre genre);
 	public User createUser(String fname,String lname,String username,
 							String password,String biography,String image);
+	public Boolean checkUser(String username, String password);
 
 }

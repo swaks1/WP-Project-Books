@@ -90,6 +90,19 @@ public class UserRepository {
 
 		    return query.getResultList();
 		  }
+		
+		public List<User> findByUsername(String username) {
+		    CriteriaBuilder cb = em.getCriteriaBuilder();
+		    CriteriaQuery<User> cq = cb.createQuery(User.class);
+		    final Root<User> root = cq.from(User.class);
+
+		      Predicate byUserName=cb.equal(root.get("username"), username);
+		      cq.where(byUserName);
+
+		    TypedQuery<User> query = em.createQuery(cq);
+
+		    return query.getResultList();
+		  }
 
 
 }

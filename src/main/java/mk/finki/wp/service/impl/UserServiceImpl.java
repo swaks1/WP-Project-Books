@@ -54,10 +54,25 @@ public class UserServiceImpl implements UserService {
 		user.setImage(image);
 		user.setLname(lname);
 		user.setPassword(password);
-		user.setUsername(username);
+		user.setUsername(username.toLowerCase());
 		user.setDateCreated(new Date());
 		
-		return user;
+		return saveOrUpdateUser(user);
+	}
+
+	@Override
+	public Boolean checkUser(String username, String password) {
+		List<User> usersByUsername = userRepo.findByUsername(username.toLowerCase());
+	
+		if(usersByUsername != null && usersByUsername.size()>0){
+			User user = usersByUsername.get(0);
+			if(user.getPassword().equals(password))
+				return true;
+			else 
+				return false;
+		}
+		else
+			return false;
 	}
 
 

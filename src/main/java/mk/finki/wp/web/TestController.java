@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mk.finki.wp.model.Author;
 import mk.finki.wp.model.Book;
+import mk.finki.wp.model.Comment;
 import mk.finki.wp.model.FavBook;
 import mk.finki.wp.model.User;
 import mk.finki.wp.model.Genre;
@@ -25,6 +26,7 @@ import mk.finki.wp.service.AuthorService;
 import mk.finki.wp.service.BookService;
 import mk.finki.wp.service.impl.AuthorServiceImpl;
 import mk.finki.wp.service.impl.BookServiceImpl;
+import mk.finki.wp.service.impl.CommentServiceImpl;
 import mk.finki.wp.service.impl.FavBookServiceImpl;
 import mk.finki.wp.service.impl.GenreServiceImpl;
 import mk.finki.wp.service.impl.UserServiceImpl;
@@ -49,6 +51,9 @@ public class TestController {
 	
 	@Autowired
 	FavBookServiceImpl favBookService;
+	
+	@Autowired
+	CommentServiceImpl commentService;
 	
 	
 	Random rand = new Random();
@@ -176,6 +181,39 @@ public class TestController {
 		 favBookService.deleteFavBook(user1, book1);
 		return new ResponseEntity<Object>(favBookByUser,HttpStatus.OK);
 	}
+	
+	@RequestMapping("/test5")
+	public ResponseEntity<Object> getObj5(){
+		String username = "i";
+		String password = "n";
+		
+		if(userService.checkUser(username, password))
+			System.out.println("TRUEEEEEEEEEEEEEEEEEEEe");
+		else System.out.println("FALSEEEE");
+		return new ResponseEntity<Object>(null,HttpStatus.OK);
+	}
+	
+	//test za Comment
+	@RequestMapping("/test4")
+	public ResponseEntity<Object> getObj4(){
+		User user1 = userService.findUserById(20L);
+		Book book1 = bookService.findBookById(10L);
+		
+		User user2 = userService.createUser("Igor", "nikolov", "i", "n", "21", "12");
+		Book book2 = bookService.findBookById(11L);
+		
+		Comment comment = commentService.createComment(user1, book1, "Ova e dobra kniga.");
+		Comment comment2 = commentService.createComment(user2, book2, "Ova e 13131 .");
+			
+		List<Comment> komentariOdKniga = commentService.findAllCommentsByBook(book2);
+		printJson(komentariOdKniga);
+		
+		comment = commentService.findCommentById(2L);
+		commentService.UpdateComment("NOV KOMENTAR", comment);
+		
+		return new ResponseEntity<Object>(comment,HttpStatus.OK);
+	}
+	
 	
 		//printanje na JAVA objekt vo JSON vo consola....
 	public void printJson(Object obj){
