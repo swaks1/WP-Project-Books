@@ -19,4 +19,18 @@
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    	 <!-- neso za IMAGE UPLOAD -->
+     <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+ 
+         <!-- setting maximum upload size -->
+        <property name="maxUploadSize" value="1000000" />
+ 
+    </bean>
+    
+    <!-- all resources inside folder src/main/webapp/resources are mapped so
+        they can be refered to inside JSP files (see header.jsp for more details) -->
+   <mvc:resources mapping="/images/**" location="/images/"/>
+   
+    
 </beans>
