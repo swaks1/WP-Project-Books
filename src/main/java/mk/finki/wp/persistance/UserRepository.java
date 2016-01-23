@@ -38,7 +38,7 @@ public class UserRepository {
 	    return entity;
 	  }
 	 
-	 public <T> T getById(Class<T> type, Long id) {
+	 public <T> T findById(Class<T> type, Long id) {
 		    CriteriaBuilder cb = em.getCriteriaBuilder();
 		    CriteriaQuery<T> cq = cb.createQuery(type);
 		    final Root<T> root = cq.from(type);

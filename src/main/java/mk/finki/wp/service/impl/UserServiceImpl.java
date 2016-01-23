@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +28,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findUserById(Long id) {
-		return userRepo.getById(User.class, id);
+		User user;
+		
+		try {
+			 user = userRepo.findById(User.class, id);
+			
+		} catch (Exception e) {
+			user = null;
+		}
+		
+		return user;
 	}
 
 	@Override
@@ -59,6 +70,14 @@ public class UserServiceImpl implements UserService {
 		
 		return saveOrUpdateUser(user);
 	}
+	@Override
+	public User createUser(User user) {
+		
+		user.setUsername(user.getUsername().toLowerCase());
+		user.setDateCreated(new Date());
+		
+		return saveOrUpdateUser(user);
+	}
 
 	@Override
 	public Boolean checkUser(String username, String password) {
@@ -73,6 +92,14 @@ public class UserServiceImpl implements UserService {
 		}
 		else
 			return false;
+	}
+
+	@Override
+	public User updateUser(User user) {
+		User userOld = userRepo.findById(User.class, user.getId());
+		user.setPassword(userOld.getPassword());
+		user.setDateCreated(userOld.getDateCreated());
+		return saveOrUpdateUser(user);
 	}
 
 

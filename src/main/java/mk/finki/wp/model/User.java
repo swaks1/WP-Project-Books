@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "users")
@@ -63,11 +65,11 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
-
+	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}
