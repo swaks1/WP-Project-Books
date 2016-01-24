@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="/images/favicon.ico" sizes="16x16 32x32 48x48 64x64"
+        type="image/vnd.microsoft.icon">
+   
+
+  <title>Book project</title>
+
+  <!-- Concatenated CSS -->
+  <link href="dest/lib.css?rev=ce521111498417454cb372b05cbd5f4d" rel="stylesheet">
+  <link href="dest/app.css?rev=b5d1dfbaa8674e0c51ab5293c28fca41" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body ng-app="book-project" ng-cloak class="ng-cloak">
+<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" ui-sref="home">Application name</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a ui-sref="home">Home</a></li>
+                    <li><a ui-sref="test">Test</a></li>
+                    <li><a ui-sref="/Home/Contact">Contact</a></li>
+                </ul>
+                <div class="col-sm-3 col-md-3">
+                    <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default " type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ui-sref="register" id="registerLink">Register</a></li>
+                    <li><a ui-sref="login" id="loginLink">Log in</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <!--views-->
+        <br>
+        <br>
+        
+       <div ui-view class="container slide" style="padding-top: 20px;">
+       
+                
+            
+        </div>
+        
+        
+        <!--footer-->
+    <div class="clearfix"></div>
+        <hr />
+        <footer>
+            <p>&copy; 2016 - Book Project</p>
+        </footer>
+    </div>
+
+
+
+<!-- Concatenated libraries -->
+<script src="dest/lib.js?rev=5984ecb1a134f4cd0a34e86193d5544f"></script>
+<!-- Concatenated application -->
+<script src="dest/src.js?rev=a1dcebf36a9e621065ba20673be9fcca"></script>
+<!-- All html templates -->
+<script src="dest/templates.js?rev=d331d2a1ac1060a3657ee6bf9fbf5416"></script>
+</body>
+</html>
