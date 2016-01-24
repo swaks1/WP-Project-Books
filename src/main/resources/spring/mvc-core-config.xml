@@ -32,5 +32,8 @@
         they can be refered to inside JSP files (see header.jsp for more details) -->
    <mvc:resources mapping="/images/**" location="/images/"/>
    
-    
+   
+   <!-- all resources inside folder src/main/webapp/resources are mapped so
+        they can be refered to inside JSP files (see header.jsp for more details) -->
+    <mvc:resources mapping="/app/**" location="/app/"/>
 </beans>
