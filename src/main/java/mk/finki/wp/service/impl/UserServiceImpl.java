@@ -102,5 +102,10 @@ public class UserServiceImpl implements UserService {
 		return saveOrUpdateUser(user);
 	}
 
+	@Override
+	public String findImageById(Long id) {
+		return userRepo.findImageById(id);
+	}
+
 
 }

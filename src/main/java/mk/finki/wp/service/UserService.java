@@ -16,5 +16,6 @@ public interface UserService {
 	public User createUser(User user);
 	public User updateUser(User user);
 	public Boolean checkUser(String username, String password);
+	public String findImageById(Long id);
 
 }

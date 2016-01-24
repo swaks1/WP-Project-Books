@@ -228,13 +228,13 @@ public class TestController {
 		return new ResponseEntity<Object>(comment,HttpStatus.OK);
 	}
 	
-	@RequestMapping("/fileUpload")
+	@RequestMapping("/test/file-upload")
 	public String uploadJsp(){
 		return "upload";
 	}
 	
 			//upload FILE 
-	 @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
+	 @RequestMapping(value = "/test/file-upload", method = RequestMethod.POST)
 	 public String uploadFileHandler(@RequestParam("file") MultipartFile file,
 			 							HttpServletRequest request) 
 	 {
@@ -242,7 +242,7 @@ public class TestController {
 	        if (!file.isEmpty()) {
 	            try {
 	                // Creating the PATH to directory to store file
-	                String uploadsDir = "/uploads/";
+	                String uploadsDir = "/uploads/test/";
                     String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
                    
                     //Creating the DIRECTORY from PATH and checking if it exists
@@ -275,13 +275,13 @@ public class TestController {
 	 
 	 
 	 	//zemanje na slika jpg
-	 @RequestMapping(value = "/getImage/{imageName}")
+	 @RequestMapping(value = "/test/get-image/{imageName}")
 	 @ResponseBody
 	 public byte[] getImage(@PathVariable String imageName, HttpServletRequest request)  {
 		 
 		 System.out.println(imageName);
 	    //get real path ja dava lokacijata od proektot...dodavame uploads za da stigneme do slikite
-		String rpath = request.getServletContext().getRealPath("/uploads/"+imageName+".jpg");
+		String rpath = request.getServletContext().getRealPath("/uploads/test/"+imageName+".jpg");
 		 
 	 	//dobivanje na PATH od String;
 		Path path = Paths.get(rpath);
@@ -300,91 +300,6 @@ public class TestController {
 
 	 }
 	 
-	 
-	 
-	 
-	 @RequestMapping(value = "/uploadUser", method = RequestMethod.POST)
-	 public String uploadUser(
-			 		 	 @RequestParam(required = false) String fname,
-						 @RequestParam(required = false) String lname,
-						 @RequestParam(required = false) String username,
-						 @RequestParam(required = false) String password,
-						 @RequestParam(required = false) String biography,
-						 @RequestParam(required = false) MultipartFile file,
-						 HttpServletRequest request) 
-	 {
-		 User user = new User();
-		 user =  userService.createUser(fname, lname, username, password, biography, "");
-	        if (!file.isEmpty()) {
-	            try {
-	                // Creating the PATH to directory to store file
-	                String uploadsDir = "/uploads/";
-                    String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
-                   
-                    //Creating the DIRECTORY from PATH and checking if it exists
-                    File directory = new File(realPathtoUploads);
-                    if(! directory.exists())
-                    {
-                    	directory.mkdir();
-                    }
-                    
-                    //extractig the extension and adding user-id as name;
-                    String originalName = file.getOriginalFilename();
-                    String extension = originalName.substring(originalName.lastIndexOf("."), 
-                    											originalName.length()); 	
-                    String name = "user-"+user.getId()+extension;
-                    
-                    //creating full path of the file we have to save
-                    String filePath = realPathtoUploads + name;
-                    
-                    user.setImage(name);
-                    user = userService.saveOrUpdateUser(user);
-                    
-                    //trasnfering the file to the destination (saving)
-                    File dest = new File(filePath);	
-                    file.transferTo(dest);
-                    
-                    printJson(user);
-	                return "You successfully uploaded file=" + name;
-	            }
-	            catch (Exception e) {
-	                return "You failed to upload  => " + e.getMessage();
-	            }
-	        }	        
-	        else 
-	        {
-	            return "You failed to upload because the file was empty.";
-	        }
-	    }
-	 
-	 @RequestMapping(value = "users/getImage/{userID}")
-	 @ResponseBody
-	 public byte[] getImageUser(@PathVariable Long userID, HttpServletRequest request)  {
-		 
-		 User user = userService.findUserById(userID);
-	    //get real path ja dava lokacijata od proektot...dodavame uploads za da stigneme do slikite
-		String rpath = request.getServletContext().getRealPath("/uploads/"+user.getImage());
-		 
-	 	//dobivanje na PATH od String;
-		Path path = Paths.get(rpath);
-		System.out.println(rpath);
-		
-		try {
-				//transfer na slikata vo bajti 
-			 byte[] data  = Files.readAllBytes(path);
-			 return data;
-			 
-		} 
-		catch (IOException e) {	
-			e.printStackTrace();
-			return null;
-		} 
-
-	 }
-	 
-	 
-	
-	
 	
 		//printanje na JAVA objekt vo JSON vo consola....
 	public void printJson(Object obj){

@@ -104,5 +104,12 @@ public class UserRepository {
 		    return query.getResultList();
 		  }
 
+		public String findImageById(Long id) {
+			TypedQuery<String> query = em.createQuery("SELECT u.image FROM User u WHERE u.id=?1",String.class);
+			query.setParameter(1, id);
+			String result = query.getSingleResult();
+			return result;
+		}
+
 
 }
