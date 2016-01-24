@@ -244,7 +244,7 @@ public class TestController {
 	        if (!file.isEmpty()) {
 	            try {
 	                // Creating the PATH to directory to store file
-	                String uploadsDir = "/uploads/test/";
+	                String uploadsDir = "/testPictures/";
                     String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
                    
                     //Creating the DIRECTORY from PATH and checking if it exists
@@ -283,7 +283,7 @@ public class TestController {
 		 
 		 System.out.println(imageName);
 	    //get real path ja dava lokacijata od proektot...dodavame uploads za da stigneme do slikite
-		String rpath = request.getServletContext().getRealPath("/uploads/test/"+imageName+".jpg");
+		String rpath = request.getServletContext().getRealPath("/testPictures/"+imageName+".jpg");
 		 
 	 	//dobivanje na PATH od String;
 		Path path = Paths.get(rpath);

@@ -79,7 +79,7 @@ public class BookController {
         if (!file.isEmpty()) {
             try {
                 // Creating the PATH to directory to store file
-               String uploadsDir = "/uploads/books/";
+               String uploadsDir = "/uploads/";
                String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
               
                //Creating the DIRECTORY from PATH and checking if it exists
