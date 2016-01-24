@@ -56,20 +56,25 @@ public class BookRepository {
 		
 	}
 	
-	public List<Book> findAllBooksByAuthor(Author author){
-		TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.author=?1"
+	public List<Book> findAllBooksByAuthor(Long authorId){
+		TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.author.id=?1"
 								,Book.class);
-		query.setParameter(1, author);
+		query.setParameter(1, authorId);
 		List <Book> results = query.getResultList();
 		return results;
 	}
-	public List<Book> findAllBooksByGenre(Genre genre){
+	public List<Book> findAllBooksByGenres(List<Genre> genres){
 		List<Book> allBooks = findAllBooks();
 		List<Book> results = new ArrayList<Book>();
 		
 		for(Book book : allBooks){
-			if(book.getGenres()!=null && book.hasGenre(genre.getGenreName()))
-				results.add(book);
+			for(Genre g :genres){
+				if(book.getGenres()!=null && book.hasGenre(g.getGenreName())){
+					results.add(book);
+					break;
+				}
+					
+			}			
 		}
 		return results;
 	}

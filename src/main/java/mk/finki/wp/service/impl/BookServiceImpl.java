@@ -17,6 +17,12 @@ import mk.finki.wp.service.BookService;
 public class BookServiceImpl implements BookService{
 	@Autowired
 	BookRepository bookRepo;
+	
+	@Autowired
+	AuthorServiceImpl authorService;
+	
+	@Autowired
+	GenreServiceImpl genreService;
 
 	@Override
 	public Book saveOrUpdateBook(Book entity) {
@@ -24,12 +30,27 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public Book createBook(String title, String description, String image) {
+	public Book createBook(String title,String description,String image,
+			Long authorId, List<Long>genres) {
 		Book book = new Book();
 		book.setTitle(title);
 		book.setDescription(description);
 		book.setImage(image);
-		return book;
+		book = saveOrUpdateBook(book);
+		
+		if(authorId != null){
+			Author author = authorService.findAuthorById(authorId);
+			book.setAuthor(author);
+		}
+		
+		if(genres != null){
+			book.setGenres(new ArrayList<Genre>());
+			for(Long id : genres){
+				Genre g = genreService.findById(id);
+				book.addGenre(g);		
+			}
+		}
+		return saveOrUpdateBook(book);
 	}
 
 	@Override
@@ -43,8 +64,8 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public List<Book> findAllBooksByAuthor(Author author) {
-		return bookRepo.findAllBooksByAuthor(author);
+	public List<Book> findAllBooksByAuthor(Long authorId) {
+		return bookRepo.findAllBooksByAuthor(authorId);
 	}
 
 	@Override
@@ -65,7 +86,24 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public List<Book> findAllBooksByGenre(Genre genre) {
-		return bookRepo.findAllBooksByGenre(genre);
+		List<Genre> genres = new ArrayList<Genre>();
+		genres.add(genre);
+		return bookRepo.findAllBooksByGenres(genres);
+	}
+
+	@Override
+	public List<Book> findAllBooksByGenres(List<Long> genreIds) {
+		List<Genre> genresArray = new ArrayList<Genre>();
+		if(genreIds != null){
+			for(Long id : genreIds){
+				Genre g = genreService.findById(id);
+				genresArray.add(g);
+				
+			}
+			List<Book> books = bookRepo.findAllBooksByGenres(genresArray);
+			return books;
+		}
+		return null;
 	}
 	
 }

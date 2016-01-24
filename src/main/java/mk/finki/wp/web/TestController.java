@@ -89,7 +89,9 @@ public class TestController {
 		
 		Book book = bookService.createBook("MOJA KNIGA HEH"+rand.nextInt(5555),
 								"NestoSEDesavat"+rand.nextInt(5555),
-								"Nema"+rand.nextInt(5555)
+								"Nema"+rand.nextInt(5555),
+								null,
+								null
 								);
 		book = bookService.setAuthor(book, author);
 		//vo konzola za test se printa
@@ -118,7 +120,7 @@ public class TestController {
 		
 			//site knigi od daden avtor
 		author = authorService.findAuthorById(1L);
-		List<Book> knigiOdAuthor  = bookService.findAllBooksByAuthor(author);
+		List<Book> knigiOdAuthor  = bookService.findAllBooksByAuthor(author.getId());
 		printJson(knigiOdAuthor);
 		
 			//site genrovi od baza

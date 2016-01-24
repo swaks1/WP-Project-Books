@@ -8,12 +8,14 @@ import mk.finki.wp.model.Genre;
 
 public interface BookService {
 	public Book saveOrUpdateBook(Book entity);
-	public Book createBook(String title,String description,String image);
+	public Book createBook(String title,String description,String image,
+				Long authorId, List<Long>genres);
 	public Book findBookById(Long id);
 	public List<Book> findAllBooks();
-	public List<Book> findAllBooksByAuthor(Author author);
+	public List<Book> findAllBooksByAuthor(Long authorId);
 	public List<Book> findAllBooksByGenre(Genre genre);
 		//add Author and Genre
 	public Book setAuthor(Book book, Author author);
 	public Book addGenre(Book book, Genre genre);
+	public List<Book> findAllBooksByGenres(List<Long> genreIds);
 }
