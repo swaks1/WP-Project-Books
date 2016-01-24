@@ -180,7 +180,7 @@ gulp.task('watch', function () {
 
 gulp.task('serve', function () {
     connect.server({
-        port: 8080,
+        port: 8000,
         livereload: true,
         middleware: function (connect, opt) {
             return [
