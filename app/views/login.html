@@ -3,33 +3,34 @@
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
-<form action="/Account/Login" class="form-horizontal" method="post" role="form"><input name="__RequestVerificationToken" type="hidden" value="EFndrD2mt4eDRqfa9vW3zrYsNEMm_eErEuGspDJb4S622No_0cBp52JUJS_b3WfwUaUiK-cpbn7J3UiaAOdDDuFn4-DadpAlav5iSmjmR_Y1" />                <h4>Use a local account to log in.</h4>
+<form  class="form-horizontal" name="form" >
+
                 <hr />
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="Email">Email</label>
+                <div class="form-group" ng-class="{ 'has-error' : form.username.$invalid && !form.username.$pristine }">
+                    <label class="col-md-2 control-label" >Username</label>
                     <div class="col-md-10">
-                        <input class="form-control" data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." id="Email" name="Email" type="text" value="" />
-                        <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                        <input class="form-control"  ng-model="username" name="username" type="text" value="" required/>
+                        <p ng-show="form.username.$invalid && !form.username.$pristine" class="help-block">You username is required.</p>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="Password">Password</label>
+                <div class="form-group" ng-class="{ 'has-error' : form.password.$invalid && !form.password.$pristine }">
+                    <label class="col-md-2 control-label" >Password</label>
                     <div class="col-md-10">
-                        <input class="form-control" data-val="true" data-val-required="The Password field is required." id="Password" name="Password" type="password" />
-                        <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                        <input class="form-control"  ng-model="password" name="password" type="password" required/>
+                        <p ng-show="form.password.$invalid && !form.password.$pristine" class="help-block">You password is required.</p>
                     </div>
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox">
-                            <input data-val="true" data-val-required="The Remember me? field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true" /><input name="RememberMe" type="hidden" value="false" />
+                            <input data-val="true"  id="RememberMe" name="RememberMe" type="checkbox" value="true" /><input name="RememberMe" type="hidden" value="false" />
                             <label for="RememberMe">Remember me?</label>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
+                        <input type="button" value="Log in" ng-click="logIn()" class="btn btn-default" ng-disabled="form.$invalid" />
                     </div>
                 </div>
                 <p>

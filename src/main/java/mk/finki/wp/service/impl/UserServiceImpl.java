@@ -107,5 +107,11 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findImageById(id);
 	}
 
+	@Override
+	public User findUsersByUsername(String username) {
+		
+		return userRepo.findByUsername(username).get(0);
+	}
+
 
 }
