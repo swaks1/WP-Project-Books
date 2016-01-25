@@ -1,50 +1,56 @@
 <h2>Register.</h2>
 
-<form  class="form-horizontal">
+<form  class="form-horizontal" name="form">
    <h4>Create a new account.</h4>
     <hr />
 
 </ul></div> 
-    <div class="form-group">
-        <label class="col-md-2 control-label" for="Username">Username</label>
+    <div class="form-group" ng-class="{ 'has-error' : form.lname.$invalid && !form.username.$pristine }">
+        <label class="col-md-2 control-label">Username</label>
         <div class="col-md-5">
-            <input class="form-control" ng-model="user.username" name="username" type="text" />
+            <input class="form-control" ng-model="user.username" ng-minlength="3" ng-maxlength="15" name="username" type="text" required /> 
+             <p ng-show="form.username.$error.minlength" class="help-block">Username to short.</p>
+             <p ng-show="form.username.$error.maxlength" class="help-block">Username to long.</p>
+             <p ng-show="form.username.$invalid && !form.username.$pristine" class="help-block">Enter a username.</p>
         </div> 
     </div>   
-    <div class="form-group">
-        <label class="col-md-2 control-label" for="fname">First name</label>
+    <div class="form-group" ng-class="{ 'has-error' : form.fname.$invalid && !form.fname.$pristine }">
+        <label class="col-md-2 control-label" >First name</label>
         <div class="col-md-5">
-            <input class="form-control"  ng-model="user.fname" name="fname" type="text" value="" />
+            <input class="form-control"  ng-model="user.fname" name="fname" type="text" value="" required/>
+            <p ng-show="form.fname.$invalid && !form.fname.$pristine" class="help-block">Enter a first name.</p>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error' : form.lname.$invalid && !form.lname.$pristine }">
+        <label class="col-md-2 control-label">Last name</label>
+        <div class="col-md-5">
+            <input class="form-control"  ng-model="user.lname" name="lname" type="text" value="" required/>
+            <p ng-show="form.lname.$invalid && !form.lname.$pristine" class="help-block">Enter a last name.</p>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error' : form.password.$invalid && !form.password.$pristine }">
+        <label class="col-md-2 control-label" >Password</label>
+        <div class="col-md-5">
+            <input class="form-control"  ng-model="user.password" name="password" type="password" required/>            
+            <p ng-show="form.password.$invalid && !form.password.$pristine" class="help-block">Enter a password.</p>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label" for="lname">Last name</label>
+        <label class="col-md-2 control-label" >Confirm password</label>
         <div class="col-md-5">
-            <input class="form-control"  ng-model="user.lname" name="lname" type="text" value="" />
+            <input class="form-control"  ng-model="user.confirmPassword" name="confirmPassword" type="password" />
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label" for="Password">Password</label>
+        <label class="col-md-2 control-label" >Choose picture</label>
         <div class="col-md-5">
-            <input class="form-control"  ng-model="user.password" name="Password" type="password" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label" for="ConfirmPassword">Confirm password</label>
-        <div class="col-md-5">
-            <input class="form-control"  ng-model="user.confirmPassword" name="ConfirmPassword" type="password" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label" for="exampleInputFile">Choose picture</label>
-        <div class="col-md-5">
-            <input class="form-control" type="file" ng-model="user.inputFile">
+            <input class="form-control" type="file" file-model="myFile">
             <p class="help-block"></p>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" ng-click="register()" value="Register" />
+            <input type="submit" class="btn btn-default" ng-click="register()" value="Register" ng-disabled="form.$invalid" />
         </div>
     </div>
 </form>

@@ -82,10 +82,10 @@ public class UserController {
 		if(!username.trim().isEmpty() && !password.trim().isEmpty())
 		{
 			if(userService.checkUser(username, password))
-			{
-				 HttpSession session = request.getSession();
-				 session.setAttribute("username", username);
+			{				 
 				 User user = userService.findUsersByUsername(username);
+				 HttpSession session = request.getSession();
+				 session.setAttribute("user", user);
 				 return new ResponseEntity<User>(user,HttpStatus.OK);
 			}
 			else
@@ -109,7 +109,9 @@ public class UserController {
 	 {
 		User user = new User();
 		user =  userService.createUser(fname, lname, username, password, biography, "");
-        if (!file.isEmpty()) {
+       
+		if (file != null && !file.isEmpty()) {
+			
             try {
                 // Creating the PATH to directory to store file
                String uploadsDir = "/uploads/";
@@ -137,7 +139,8 @@ public class UserController {
                
                user.setImage(name);
                user = userService.saveOrUpdateUser(user);
-               
+               HttpSession session = request.getSession();
+               session.setAttribute("user", user);
                printJson(user);
                return new ResponseEntity<User>(user,HttpStatus.OK);
             }
