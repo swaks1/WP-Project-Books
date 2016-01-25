@@ -18,4 +18,5 @@ public interface BookService {
 	public Book setAuthor(Book book, Author author);
 	public Book addGenre(Book book, Genre genre);
 	public List<Book> findAllBooksByGenres(List<Long> genreIds);
+	public String findImageById(Long id);
 }

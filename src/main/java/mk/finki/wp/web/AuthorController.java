@@ -20,47 +20,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import mk.finki.wp.model.Author;
 
-import mk.finki.wp.model.Book;
-
-import mk.finki.wp.service.BookService;
+import mk.finki.wp.service.AuthorService;
 
 
 @RestController
-@RequestMapping(value = "/api/books" ,produces = MediaType.APPLICATION_JSON_VALUE)
-public class BookController {
-
+@RequestMapping(value = "/api/authors" ,produces = MediaType.APPLICATION_JSON_VALUE)
+public class AuthorController {
+	
+	
 	@Autowired
-	BookService bookService;
-
+	AuthorService authorService;
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ResponseEntity<List<Book>> getAllBooks(){
+	public ResponseEntity<?> getAllAuthors(){
 		
-		List<Book> allBooks = bookService.findAllBooks();
-		return new ResponseEntity<List<Book>>(allBooks,HttpStatus.OK);
+		List<Author> allAuthors = authorService.findAllAuthors();
+		return new ResponseEntity<List<Author>>(allAuthors,HttpStatus.OK);
 		
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Book> getBookById(@PathVariable Long id){
+	public ResponseEntity<?> getAuthorById(@PathVariable Long id){
 		
-		Book book = bookService.findBookById(id);
-		return new ResponseEntity<Book>(book,HttpStatus.OK);
+		Author author = authorService.findAuthorById(id);
+		return new ResponseEntity<Author>(author,HttpStatus.OK);
 		
 	}
-	
-	@RequestMapping(value = "/new-book", method = RequestMethod.POST)
-	public ResponseEntity<?> saveNewBook(
-							 @RequestParam(required = false)String title,
-							 @RequestParam(required = false) String description,
-							 @RequestParam(required = false) Long authorId,
-							 @RequestParam(required = false) List<Long> genres,
+
+	@RequestMapping(value = "/new-author", method = RequestMethod.POST)
+	public ResponseEntity<?> saveNewAuthor(
+							 @RequestParam(required = false)String name,
+							 @RequestParam(required = false) String surname,
+							 @RequestParam(required = false) String biography,
 							 @RequestParam(required = false) MultipartFile file,
 							 HttpServletRequest request)
 	{
-		Book book =  bookService.createBook(title, description, "",authorId,genres);
+		Author author =  authorService.createAuthor(surname, surname, "", biography);
         if (file!=null && !file.isEmpty()) {
             try {
                 // Creating the PATH to directory to store file
@@ -78,35 +75,36 @@ public class BookController {
                String originalName = file.getOriginalFilename();
                String extension = originalName.substring(originalName.lastIndexOf("."), 
                											originalName.length()); 	
-               String name = "book-"+book.getId()+extension;
+               String imageName = "author-"+author.getId()+extension;
                
                //creating full path of the file we have to save
-               String filePath = realPathtoUploads + name;
+               String filePath = realPathtoUploads + imageName;
                             
                //trasnfering the file to the destination (saving)
                File dest = new File(filePath);	
                file.transferTo(dest);
                
-               book.setImage(name);
-               book = bookService.saveOrUpdateBook(book);
+               author.setImage(imageName);
+               author = authorService.saveOrUpdateAuthor(author);
                
-               return new ResponseEntity<Book>(book,HttpStatus.OK);
+               return new ResponseEntity<Author>(author,HttpStatus.OK);
             }
             catch (Exception e) {
-                 return new ResponseEntity<String>("You FAILED to save book "+e.getMessage(),
+                 return new ResponseEntity<String>("You FAILED to save Author "+e.getMessage(),
                 		 							HttpStatus.OK);
             }
         }	        
         else {
-        	return new ResponseEntity<Book>(book,HttpStatus.OK); 
+        	return new ResponseEntity<Author>(author,HttpStatus.OK); 
         }
 	 }
 	
-	@RequestMapping(value = "/get-image/{bookId}")
-	 public byte[] getImageUser(@PathVariable Long bookId, HttpServletRequest request)  {
+	
+	@RequestMapping(value = "/get-image/{authorId}")
+	 public byte[] getImageUser(@PathVariable Long authorId, HttpServletRequest request)  {
 		 
 		//get image name from database
-		String image = bookService.findImageById(bookId);
+		String image = authorService.findImageById(authorId);
 		
 	    //get real path ja dava lokacijata od proektot...dodavame uploads za da stigneme do slikite
 		String rpath = request.getServletContext().getRealPath("/uploads/"+image);
@@ -127,37 +125,4 @@ public class BookController {
 		} 
 
 	 }
-	
-	@RequestMapping(value = "/by-author/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getBooksByAuthor(@PathVariable Long id){
-		
-		List<Book> books = bookService.findAllBooksByAuthor(id);
-		return new ResponseEntity<List<Book>>(books,HttpStatus.OK);
-		
-	}
-	
-	@RequestMapping(value = "/by-genre", method = RequestMethod.POST)
-	public ResponseEntity<?> getBooksByGenre(@RequestParam List<Long> genres){
-		
-		List<Book> books = bookService.findAllBooksByGenres(genres);
-		return new ResponseEntity<List<Book>>(books,HttpStatus.OK);
-		
-	}
-	
-	
-	//printanje na JAVA objekt vo JSON vo consola....
-		public void printJson(Object obj){
-			 ObjectMapper mapper = new ObjectMapper();
-			  try {
-				System.out.println(mapper.writerWithDefaultPrettyPrinter().
-						writeValueAsString(obj));
-				
-
-				} catch (JsonProcessingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		}
-	
-
 }

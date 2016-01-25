@@ -98,6 +98,36 @@
  	 
  	 </form>
  	 
+ 	 
+ 	 	<form method="POST" style="width:300px;float:left;'"
+ 		action="/book-project/api/authors/new-author" enctype="multipart/form-data">
+ 		
+		<h2>INSER BOOK</h2>
+ 	 <div class="form-group">
+	    <label for="personMobile">Name:</label>
+	    <input type="text" name="name" class="form-control" >
+ 	 </div>
+ 	 <div class="form-group">
+	    <label for="personMobile">image:</label>
+	    <input type="text" name="surname"  class="form-control" >
+ 	 </div>
+ 	
+ 	  <div class="form-group">
+	    <label for="personMobile">Biography  :</label>
+	    <input type="file"  name="file" class="form-control" >
+ 	 </div>
+ 	 
+ 	 <div class="form-group">
+	    <label for="personMobile">Biography  :</label>
+	    <input type="text"  name="biography" class="form-control" >
+ 	 </div>
+ 	 
+ 	
+ 	
+ 	 <input type="submit" class="btn btn-primary" value="Upload"> 
+ 	 
+ 	 </form>
+ 	 
  	 	
  
  

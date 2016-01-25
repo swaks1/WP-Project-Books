@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import mk.finki.wp.model.Genre;
 import mk.finki.wp.model.User;
 import mk.finki.wp.persistance.GenreRepository;
-import mk.finki.wp.persistance.UserRepository;
+
 import mk.finki.wp.service.GenreService;
 
 
@@ -50,7 +50,7 @@ public class GenreServiceImpl implements GenreService {
 	public Genre createGenre(String genreName) {
 		Genre genre = new Genre();
 		genre.setGenreName(genreName);
-		return genre;
+		return saveOrUpdateGenre(genre);
 	}
 
 	@Override

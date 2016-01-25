@@ -105,5 +105,10 @@ public class BookServiceImpl implements BookService{
 		}
 		return null;
 	}
+
+	@Override
+	public String findImageById(Long id) {
+		return bookRepo.findImageById(id);
+	}
 	
 }

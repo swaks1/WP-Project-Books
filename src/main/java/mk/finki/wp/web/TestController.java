@@ -187,7 +187,7 @@ public class TestController {
 			
 	
 		//all Books from USER
-		List<Book> favBookByUser =favBookService.findAllBooksByUser(user1);
+		List<Book> favBookByUser =favBookService.findAllBooksByUser(user1.getId());
 		printJson(favBookByUser);
 		
 		//all favBooks in BASE

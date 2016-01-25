@@ -11,5 +11,6 @@ public interface AuthorService {
 	public Author findAuthorById(Long id);
 	public List<Author> findAllAuthors();
 	public Author findAuthorOfBook(Book entity);
+	public String findImageById(Long authorId);
 
 }
