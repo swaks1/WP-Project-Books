@@ -5,7 +5,7 @@
     <hr />
 
 </ul></div> 
-    <div class="form-group" ng-class="{ 'has-error' : form.lname.$invalid && !form.username.$pristine }">
+    <div class="form-group" ng-class="{ 'has-error' : form.username.$invalid && !form.username.$pristine }">
         <label class="col-md-2 control-label">Username</label>
         <div class="col-md-5">
             <input class="form-control" ng-model="user.username" ng-minlength="3" ng-maxlength="15" name="username" type="text" required /> 
@@ -35,22 +35,24 @@
             <p ng-show="form.password.$invalid && !form.password.$pristine" class="help-block">Enter a password.</p>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-class="{ 'has-error' : form.confirmPassword.$invalid && !form.confirmPassword.$pristine }">
         <label class="col-md-2 control-label" >Confirm password</label>
         <div class="col-md-5">
-            <input class="form-control"  ng-model="user.confirmPassword" name="confirmPassword" type="password" />
+            <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" ng-model="user.confirmPassword"  required />
+            <span ng-show="">Please confirm your password.</span>
+            <span ng-show="">Passwords do not match.</span>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" >
         <label class="col-md-2 control-label" >Choose picture</label>
         <div class="col-md-5">
-            <input class="form-control" type="file" file-model="myFile">
+            <input class="form-control" type="file" file-model="myFile" accept="image/*">
             <p class="help-block"></p>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" ng-click="register()" value="Register" ng-disabled="form.$invalid" />
+            <input type="button" class="btn btn-default" ng-click="register()" value="Register" ng-disabled="form.$invalid" />
         </div>
     </div>
 </form>
