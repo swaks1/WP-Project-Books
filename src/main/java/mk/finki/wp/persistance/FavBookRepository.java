@@ -50,10 +50,10 @@ public class FavBookRepository {
 		
 	}
 	
-	public List<Book> findAllBooksByUser(User user){
+	public List<Book> findAllBooksByUser(Long userId){
 		TypedQuery<Book> query = em.createQuery("SELECT b.origin FROM FavBook b WHERE b.user.id=?1"
 								,Book.class);
-		query.setParameter(1, user.getId());
+		query.setParameter(1, userId);
 		List <Book> results = query.getResultList();
 		return results;
 	}

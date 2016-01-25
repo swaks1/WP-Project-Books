@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,11 +27,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mk.finki.wp.model.User;
-import mk.finki.wp.service.AuthorService;
-import mk.finki.wp.service.BookService;
-import mk.finki.wp.service.CommentService;
-import mk.finki.wp.service.FavBookService;
-import mk.finki.wp.service.GenreService;
+
 import mk.finki.wp.service.UserService;
 
 
@@ -42,25 +38,21 @@ public class UserController {
 	@Autowired
 	UserService userService; 
 	
-	@Autowired
-	AuthorService authorService;
-	
-	@Autowired
-	BookService bookService;
-	
-	@Autowired
-	GenreService genreService;
-	
-	@Autowired
-	FavBookService favBookService;
-	
-	@Autowired
-	CommentService commentService;
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<User> getUserById(@PathVariable Long id){
 		
 		User user =  userService.findUserById(id);
+		return new ResponseEntity<User>(user,HttpStatus.OK);
+		
+		}
+	
+	@RequestMapping(value = "/get-session", method = RequestMethod.GET)
+	public ResponseEntity<User> getSession(HttpServletRequest request ){
+		
+		HttpSession session = request.getSession();
+		User user =	(User)session.getAttribute("user");
+		
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 		
 		}
@@ -70,6 +62,22 @@ public class UserController {
 		
 		User updatedUser = userService.updateUser(user);
 		return new ResponseEntity<User>(updatedUser,HttpStatus.OK);
+		
+		}
+	
+	@RequestMapping(value = "/change-password", method = RequestMethod.POST)
+	public ResponseEntity<?> changePassword(@RequestParam Long id,
+										@RequestParam String oldPassword,
+										@RequestParam String newPassword){
+		
+		User user = userService.findUserById(id);
+		if(oldPassword.equals(user.getPassword())){
+			user.setPassword(newPassword);
+			user = userService.saveOrUpdateUser(user);
+			return new ResponseEntity<User>(user,HttpStatus.OK);
+		}
+		else
+			return new ResponseEntity<Object>(null,HttpStatus.OK);
 		
 		}
 	
@@ -190,7 +198,7 @@ public class UserController {
 		 
 		User user = userService.findUserById(userId);
 		
-        if (!file.isEmpty()) {
+        if (file != null && !file.isEmpty()) {
             try {
                 // Creating the PATH to directory to store file
                String uploadsDir = "/uploads/";

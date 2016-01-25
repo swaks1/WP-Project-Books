@@ -28,7 +28,7 @@ public class AuthorServiceImpl implements AuthorService {
 		author.setSurname(surname);
 		author.setImage(image);
 		author.setBiography(biography);
-		return author;
+		return saveOrUpdateAuthor(author);
 	}
 
 	@Override
@@ -44,6 +44,11 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public Author findAuthorOfBook(Book entity) {
 		return entity.getAuthor();
+	}
+
+	@Override
+	public String findImageById(Long authorId) {
+		return authorRepo.findImageById(authorId);
 	}
 
 }

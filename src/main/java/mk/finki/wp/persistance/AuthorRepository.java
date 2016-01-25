@@ -42,4 +42,11 @@ public class AuthorRepository {
 		Author result = query.getSingleResult();
 		return result;
 	}
+
+	public String findImageById(Long id) {
+		TypedQuery<String> query = em.createQuery("SELECT a.image FROM Author a WHERE a.id=?1",String.class);
+		query.setParameter(1, id);
+		String result = query.getSingleResult();
+		return result;
+	}
 }
