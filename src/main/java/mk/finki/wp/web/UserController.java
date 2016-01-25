@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,6 +72,30 @@ public class UserController {
 		return new ResponseEntity<User>(updatedUser,HttpStatus.OK);
 		
 		}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ResponseEntity<?> loginUser(
+							@RequestParam(required = false) String username,
+							@RequestParam(required = false) String password,
+							HttpServletRequest request){
+		
+		if(!username.trim().isEmpty() && !password.trim().isEmpty())
+		{
+			if(userService.checkUser(username, password))
+			{
+				 HttpSession session = request.getSession();
+				 session.setAttribute("username", username);
+				 User user = userService.findUsersByUsername(username);
+				 return new ResponseEntity<User>(user,HttpStatus.OK);
+			}
+			else
+				return new ResponseEntity<Object>(null,HttpStatus.OK);
+
+		}
+	else
+		return new ResponseEntity<Object>(null,HttpStatus.OK);
+	}
+
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	 public ResponseEntity<?> registerUser(

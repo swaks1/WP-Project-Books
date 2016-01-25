@@ -8,6 +8,7 @@ import mk.finki.wp.model.User;
 public interface UserService {
 	
 	public List<User> findUsersByName(String fname);
+	public User findUsersByUsername(String username);
 	public User findUserById(Long id);
 	public User saveOrUpdateUser(User user);
 	public User addGenre(User user,Genre genre);
