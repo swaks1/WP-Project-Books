@@ -56,6 +56,16 @@ public class UserController {
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 		
 		}
+	
+	@RequestMapping(value = "/abandon-session", method = RequestMethod.GET)
+	public ResponseEntity<?> abandonSession(HttpServletRequest request ){
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		return new ResponseEntity<String>("Abandoned",HttpStatus.OK);
+		
+		}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public ResponseEntity<User> updateUser(@RequestBody User user){
