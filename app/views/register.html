@@ -39,8 +39,8 @@
         <label class="col-md-2 control-label" >Confirm password</label>
         <div class="col-md-5">
             <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" ng-model="user.confirmPassword"  required />
-            <span ng-show="">Please confirm your password.</span>
-            <span ng-show="">Passwords do not match.</span>
+            <p class="help-block" ng-show="form.confirmPassword.$invalid && !form.confirmPassword.$pristine">Please confirm your password.</p>
+            <p class="help-block" id="noMatch" hidden>Passwords do not match.</p>
         </div>
     </div>
     <div class="form-group" >

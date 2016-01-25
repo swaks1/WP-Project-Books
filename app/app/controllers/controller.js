@@ -30,9 +30,12 @@ bookProject
             '$scope','$http','$state',
     function($scope,$http, $state){
         $scope.register = function(){
-            
-                    // post za slikataa
-        if ($scope.form.$valid) {
+            if ($scope.user.password !== $scope.user.confirmPassword && $scope.form.$valid)
+            {
+                $("#noMatch").show();
+            }
+            if ($scope.user.password === $scope.user.confirmPassword && $scope.form.$valid)
+            {
             
             var uploadUrl = 'http://localhost:8080/book-project/api/users/register';
             var fd = new FormData();
@@ -43,12 +46,14 @@ bookProject
             fd.append('biography',"");  
             
             var file = $scope.myFile;
-            var fileType = file.type;
-            if( fileType.indexOf("image")!= -1 )
-               fd.append('file', file);
-            else 
-                console.log("vnesete SLIKA");
-
+            if(file != null)
+            {
+                var fileType = file.type;
+                if( fileType.indexOf("image")!= -1 )
+                   fd.append('file', file);
+                else 
+                    console.log("Toa ne e slika hhihihi ");
+            }
             $http.post(uploadUrl, fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}

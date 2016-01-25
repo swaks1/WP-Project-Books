@@ -1,7 +1,7 @@
-<h2>Account Settings</h>
+<h2>Account Settings</h2>
 <form  class="form-horizontal">
 <div class="form-group">
-        <label class="col-md-2 control-label" for="Username">Username</label>
+        <label class="col-md-2 control-label" >Username</label>
         <div class="col-md-5">
             <input class="form-control" ng-model="username" name="username" type="text" disabled />
         </div> 
@@ -18,24 +18,17 @@
             <input class="form-control"  ng-model="lname" name="lname" type="text" value="" />
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label" for="Password">Password</label>
-        <div class="col-md-5">
-            <input class="form-control"  ng-model="password" name="Password" type="password" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label" for="ConfirmPassword">Confirm password</label>
-        <div class="col-md-5">
-            <input class="form-control"  ng-model="confirmPassword" name="ConfirmPassword" type="password" />
-        </div>
-    </div>
+    
     <div class="form-group">
         <label class="col-md-2 control-label" for="exampleInputFile">Choose picture</label>
         <div class="col-md-5">
             <input class="form-control" type="file" ng-model="inputFile">
             <p class="help-block"></p>
         </div>
+    </div> 
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">Save changes</button>
+        </div>
     </div>
-  <button type="submit" class="btn btn-default">Save changes</button>
 </form>
