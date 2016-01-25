@@ -274,7 +274,47 @@ public class TestController {
 	        }
 	    }
 	 
+	 @RequestMapping(value = "/test/user-upload", method = RequestMethod.POST)
+	 public String uploadUser(@RequestParam String user ,
+			 @RequestParam String password,
+			 @RequestParam String fname,
+			 @RequestParam("file") MultipartFile file,
+			 							HttpServletRequest request) 
+	 {
+		 System.out.println(user.toString());
+		 
+	        if (!file.isEmpty()) {
+	            try {
+	                // Creating the PATH to directory to store file
+	                String uploadsDir = "/testPictures/";
+                    String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
+                   
+                    //Creating the DIRECTORY from PATH and checking if it exists
+                    File directory = new File(realPathtoUploads);
+                    if(! directory.exists())
+                    {
+                    	directory.mkdir();
+                    }
+                    
+                    //creating full path of the file we have to save
+                    String originalName = file.getOriginalFilename();
+                    String filePath = realPathtoUploads + originalName;
+                    
+                    //trasnfering the file to the destination (saving)
+                    File dest = new File(filePath);	
+                    file.transferTo(dest);
 	 
+	                return "You successfully uploaded file" +originalName ;
+	            }
+	            catch (Exception e) {
+	                return "You failed to upload  => " + e.getMessage();
+	            }
+	        }	        
+	        else 
+	        {
+	            return "You failed to upload  because the file was empty.";
+	        }
+	    }
 	 
 	 	//zemanje na slika jpg
 	 @RequestMapping(value = "/test/get-image/{imageName}")
@@ -299,6 +339,19 @@ public class TestController {
 			e.printStackTrace();
 			return null;
 		} 
+
+	 }
+	 
+	 
+	 @RequestMapping(value = "/test/register", method = RequestMethod.POST)
+	 public String registerUSER(@RequestParam String username ,
+			 @RequestParam String password,
+			 @RequestParam String fname,
+			 	HttpServletRequest request) 
+	 {
+		System.out.println(username + password + fname);
+		return "good";		 
+	       
 
 	 }
 	 
