@@ -33,23 +33,29 @@ bookProject
             
                     // post za slikataa
         if ($scope.form.$valid) {
-            var file = $scope.myFile;
+            
             var uploadUrl = 'http://localhost:8080/book-project/api/users/register';
             var fd = new FormData();
-            fd.append('file', file);
             fd.append('username',$scope.user.username);
             fd.append('password',$scope.user.password);
             fd.append('fname',$scope.user.fname);
             fd.append('lname',$scope.user.lname);
-            fd.append('biography',"");
+            fd.append('biography',"");  
+            
+            var file = $scope.myFile;
+            var fileType = file.type;
+            if( fileType.indexOf("image")!= -1 )
+               fd.append('file', file);
+            else 
+                console.log("vnesete SLIKA");
 
             $http.post(uploadUrl, fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             })
             .success(function(data){
-            console.log(data);
-            $state.go("home");
+                console.log(data);
+                $state.go("home");
             })
             .error(function(data){
                 console.log(data);

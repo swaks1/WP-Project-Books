@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: book-project
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Riste
+Built-By: Marija
 Implementation-Vendor-Id: book-project
-Build-Jdk: 1.8.0_71
+Build-Jdk: 1.8.0_60
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 
