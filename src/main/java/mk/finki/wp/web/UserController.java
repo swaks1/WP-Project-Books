@@ -52,12 +52,12 @@ public class UserController {
 		
 		HttpSession session = request.getSession();
 		User user =	(User)session.getAttribute("user");
-		
+		System.out.println(session.getId());
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 		
 		}
 	
-	@RequestMapping(value = "/abandon-session", method = RequestMethod.GET)
+	@RequestMapping(value = "/abandon-session", method = RequestMethod.POST)
 	public ResponseEntity<?> abandonSession(HttpServletRequest request ){
 		
 		HttpSession session = request.getSession();
@@ -104,6 +104,7 @@ public class UserController {
 				 User user = userService.findUsersByUsername(username);
 				 HttpSession session = request.getSession();
 				 session.setAttribute("user", user);
+				 System.out.println(session.getId());
 				 return new ResponseEntity<User>(user,HttpStatus.OK);
 			}
 			else
@@ -163,8 +164,7 @@ public class UserController {
                return new ResponseEntity<User>(user,HttpStatus.OK);
             }
             catch (Exception e) {
-                 return new ResponseEntity<String>("You FAILED to register "+e.getMessage(),
-                		 							HttpStatus.OK);
+                 return new ResponseEntity<Object>(null,HttpStatus.OK);
             }
         }	        
         else {
@@ -239,8 +239,7 @@ public class UserController {
                return new ResponseEntity<User>(user,HttpStatus.OK);
             }
             catch (Exception e) {
-                 return new ResponseEntity<String>("You FAILED to register "+e.getMessage(),
-                		 							HttpStatus.OK);
+                 return new ResponseEntity<Object>(null,HttpStatus.OK);
             }
         }	        
         else {

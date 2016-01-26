@@ -1,43 +1,41 @@
 bookProject
+.controller('headerCtrl', function ($rootScope, loginService) { 
+    $rootScope.loggedIn = loginService.islogged();
+})
+
 .controller("loginCtrl",[
-            '$scope','$http','$state',
-    function($scope, $http, $state){
+            '$scope','$http','$state','loginService',
+    function($scope, $http, $state,loginService){
         $scope.logIn = function(){
             if ($scope.form.$valid) {
 
-                 var uploadUrl = 'http://localhost:8080/book-project/api/users/login';
-                 var fd = new FormData();
+                var fd = new FormData();
                 fd.append('username', $scope.username);
                 fd.append('password',$scope.password);
-                console.log($scope.username + $scope.password);
-                $http.post(uploadUrl, fd, {
-                    transformRequest: angular.identity,
-                    headers: {'Content-Type': undefined}
-                })
-                .success(function(data){
-                    console.log(data);
-                     $state.go("home");
-                })
-                .error(function(data){
-                    console.log(data);
-                });
+                loginService.login(fd, $scope );
             }
         }
 
  }])
  
+ .controller("logoutCtrl",[
+            '$scope', '$http', '$state',"loginService",
+    function($scope, $http, $state, loginService){
+        loginService.logout();
+ }])
+
  .controller("registerCtrl",[
-            '$scope','$http','$state',
-    function($scope,$http, $state){
+            '$scope','$http','$state','loginService','$rootScope',
+    function($scope,$http, $state,loginService,$rootScope){
         $scope.register = function(){
             if ($scope.user.password !== $scope.user.confirmPassword && $scope.form.$valid)
             {
                 $("#noMatch").show();
+                
             }
             if ($scope.user.password === $scope.user.confirmPassword && $scope.form.$valid)
             {
             
-            var uploadUrl = 'http://localhost:8080/book-project/api/users/register';
             var fd = new FormData();
             fd.append('username',$scope.user.username);
             fd.append('password',$scope.user.password);
@@ -54,17 +52,8 @@ bookProject
                 else 
                     console.log("Toa ne e slika hhihihi ");
             }
-            $http.post(uploadUrl, fd, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-            })
-            .success(function(data){
-                console.log(data);
-                $state.go("home");
-            })
-            .error(function(data){
-                console.log(data);
-            });
+            loginService.register(fd,$scope);
+            
         }
             // //POST SO REQUEST ATTRIBUT
             // postUrl="http://localhost:8080/book-project/api/users/register";

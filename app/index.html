@@ -55,8 +55,9 @@
                     </form>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a ui-sref="register" id="registerLink">Register</a></li>
-                    <li><a ui-sref="login" id="loginLink">Log in</a></li>
+                    <li><a ng-hide="loggedIn" ui-sref="register" id="registerLink">Register</a></li>
+                    <li><a ng-hide="loggedIn" ui-sref="login" id="loginLink">Log in</a></li>
+                    <li><a ng-show="loggedIn" ui-sref="logout" id="logOutLink">Log out</a></li>
                 </ul>
 
             </div>
@@ -87,9 +88,9 @@
 <!-- Concatenated libraries -->
 <script src="dest/lib.js?rev=22b6b6b33fa09a9924abc0affc0392af"></script>
 <!-- Concatenated application -->
-<script src="dest/src.js?rev=67874da3ad49ad8cd0ae667372235f47"></script>
+<script src="dest/src.js?rev=047d36bd21fee5e3f4947afd621b5eba"></script>
 <!-- All html templates -->
-<script src="dest/templates.js?rev=1949213a27acb7c28ffd3108c8d009b2"></script>
+<script src="dest/templates.js?rev=02ea732f8c366cc9bb5d28b95f5b4361"></script>
 
 
 </body>

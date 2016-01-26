@@ -1,4 +1,5 @@
-bookProject.factory('sessionService', ['$http', function($http){
+bookProject
+.factory('sessionService', ['$http', function($http){
 	return{
 		set:function(key,value){
 			return sessionStorage.setItem(key,value);
@@ -7,39 +8,62 @@ bookProject.factory('sessionService', ['$http', function($http){
 			return sessionStorage.getItem(key);
 		},
 		destroy:function(key){
-			//$http.post('data/destroy_session.php');
+			//$http.post('http://localhost:8080/book-project/api/users/abandon-session');
 			return sessionStorage.removeItem(key);
 		}
 	};
 }])
-.factory('loginService',function($http, $location, sessionService){
+.factory('loginService',function($http, $state, sessionService){
 	return{
 		login:function(data,scope){
-			var $promise=$http.post('data/user.php',data); //send data to user.php
+			var $promise = $http.post('http://localhost:8080/book-project/api/users/login',data, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                }); //send data 
 			$promise.then(function(msg){
-				var uid=msg.data;
-				if(uid){
-					//scope.msgtxt='Correct information';
-					sessionService.set('uid',uid);
-					$location.path('/home');
-				}	       
+				var user = msg.data;
+				if(user){
+					sessionService.set('user',JSON.stringify(user));
+					$state.go("home");
+					}	       
 				else  {
-					scope.msgtxt='incorrect information';
-					$location.path('/login');
+					scope.msgtxt='Incorrect password or username';
+					$state.go('login');
 				}				   
-			});
+			}, function(data, status, headers, config) {
+				$state.go('login');
+            });
 		},
 		logout:function(){
-			sessionService.destroy('uid');
-			$location.path('/login');
+			sessionService.destroy('user');
+			$state.go('home');
 		},
 		islogged:function(){
-			var $checkSessionServer=$http.post('data/check_session.php');
-			return $checkSessionServer;
-			/*
+			// var $checkSessionServer = $http.get('http://localhost:8080/book-project/api/users/get-session');
+			// return $checkSessionServer;
 			if(sessionService.get('user')) return true;
-			else return false;
-			*/
+			else return false;			
+		},
+		register:function(data,scope){
+			var $promise = $http.post('http://localhost:8080/book-project/api/users/register',data, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                }); //send data 
+			$promise
+			.success(function(msg){
+				var user = msg;
+				console.log(user);
+				if(user != null){
+					sessionService.set('user',JSON.stringify(user));
+					$state.go("home");
+					}	       
+				else  {
+					scope.msgtxt='Incorrect password or username';
+					$state.go('login');
+				}				   
+			}).error(function(data, status, headers, config) {
+				$state.go('register');
+            });
 		}
 	}
 

@@ -15,12 +15,16 @@ var bookProject = angular.module('book-project', [
        $stateProvider
        .state('home',{
            url:'/',
-           templateUrl:'views/home.html'
+           templateUrl:'views/home.html',
+           controller:"headerCtrl"
        })
        .state('login',{
-           url:"/login",
            templateUrl: "views/login.html",
            controller: "loginCtrl"
+       })
+       .state('logout',{
+           url:"/logout",
+           controller: "logoutCtrl"
        })
        .state("register",{
            url:"/register",
