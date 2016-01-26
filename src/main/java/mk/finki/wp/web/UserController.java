@@ -1,10 +1,12 @@
 package mk.finki.wp.web;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +31,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import mk.finki.wp.model.User;
 
 import mk.finki.wp.service.UserService;
-
-
+	
+	//moze da se koristi za CORS  (1.5 hours wasted for nothing )
+ //@CrossOrigin(origins = "http://localhost:8000", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/api/users" ,produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
@@ -64,6 +67,15 @@ public class UserController {
 		session.invalidate();
 		
 		return new ResponseEntity<String>("Abandoned",HttpStatus.OK);
+		
+		}
+	
+	@RequestMapping(value = "/all-usernames", method = RequestMethod.GET)
+	public ResponseEntity<?> findAllUsernames( ){
+		
+		List<String> usernames = userService.findAllUsernames();
+		
+		return new ResponseEntity<List<String>>(usernames,HttpStatus.OK);
 		
 		}
 

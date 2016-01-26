@@ -2,6 +2,23 @@ bookProject
 .controller("loginCtrl",[
             '$scope','$http','$state',
     function($scope, $http, $state){
+
+        
+        console.log("here");
+        var usernames = [];
+        $http({ method: 'GET', url: 'http://localhost:8080/book-project/api/books' }).
+        success(function (data, status, headers, config) {
+            usernames = data ;
+            console.log(data);
+             
+         }).
+         error(function (data, status, headers, config) {
+            $scope.allOrders=[];
+            console.log("nema nisto");
+        });    
+
+
+
         $scope.logIn = function(){
             if ($scope.form.$valid) {
 

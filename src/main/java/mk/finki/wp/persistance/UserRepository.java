@@ -110,6 +110,12 @@ public class UserRepository {
 			String result = query.getSingleResult();
 			return result;
 		}
+		
+		public List<String> findAllUsernames() {
+			TypedQuery<String> query = em.createQuery("SELECT u.username FROM User u ",String.class);
+			List<String> result = query.getResultList();
+			return result;
+		}
 
 
 }
