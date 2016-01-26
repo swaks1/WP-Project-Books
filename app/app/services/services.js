@@ -24,7 +24,9 @@ bookProject
 				var user = msg.data;
 				if(user){
 					sessionService.set('user',JSON.stringify(user));
+					alert("Log In Succesfull...");
 					$state.go("home");
+					
 					}	       
 				else  {
 					scope.msgtxt='Incorrect password or username';
@@ -36,13 +38,16 @@ bookProject
 		},
 		logout:function(){
 			sessionService.destroy('user');
+			alert("Log Out...");
 			$state.go('home');
 		},
 		islogged:function(){
 			// var $checkSessionServer = $http.get('http://localhost:8080/book-project/api/users/get-session');
 			// return $checkSessionServer;
-			if(sessionService.get('user')) return true;
-			else return false;			
+			if(sessionService.get('user'))
+			 return true;
+			else 
+				return false;			
 		},
 		register:function(data,scope){
 			var $promise = $http.post('http://localhost:8080/book-project/api/users/register',data, {
@@ -58,12 +63,24 @@ bookProject
 					$state.go("home");
 					}	       
 				else  {
-					scope.msgtxt='Incorrect password or username';
-					$state.go('login');
+					alert("Failed to Register..Try Again");
 				}				   
 			}).error(function(data, status, headers, config) {
+				alert("Failed to Register..Try Again Error"+ status);
 				$state.go('register');
             });
+		},
+		getUsernames:function(callback){
+			 console.log("getting Usernames");
+			 $http({ method: 'GET', url: 'http://localhost:8080/book-project/api/users/all-usernames' }).
+	        success(function (data, status, headers, config) {
+	            console.log(data);
+	          	callback(data);
+	             
+	         }).
+	         error(function (data, status, headers, config) {
+	            console.log("ERROR in usernames");
+	        }); 
 		}
 	}
 
