@@ -35,6 +35,10 @@ var bookProject = angular.module('book-project', [
            url:"/single",
            templateUrl:"views/single.html"
        })
+       .state("test",{
+           url:"/test",
+           templateUrl:"views/list-search.html"
+       })
        .state("user",{
            url:"/user",
            templateUrl:"views/user-profile.html"
