@@ -24,7 +24,6 @@ bookProject
 				var user = msg.data;
 				if(user){
 					sessionService.set('user',JSON.stringify(user));
-					alert("Log In Succesfull...");
 					$state.go("home");
 					
 					}	       
@@ -38,7 +37,6 @@ bookProject
 		},
 		logout:function(){
 			sessionService.destroy('user');
-			alert("Log Out...");
 			$state.go('home');
 		},
 		islogged:function(){
@@ -46,6 +44,13 @@ bookProject
 			// return $checkSessionServer;
 			if(sessionService.get('user'))
 			 return true;
+			else 
+				return false;			
+		},
+		isloggedUser:function(){
+			if(sessionService.get('user')){
+			 	return JSON.parse(sessionService.get('user'));
+			}
 			else 
 				return false;			
 		},
@@ -84,4 +89,23 @@ bookProject
 		}
 	}
 
-});
+})
+.factory("userProfileService",["$http", "loginService", function($http, loginService){
+	return{
+		getFavBooks:function(callback, userid){
+			$http.get("http://localhost:8080/book-project/api/fav-books/of-user/" + userid)
+			.success(function (data){
+				callback(data);
+			})
+			.error(function (data){console.log("ERROR in fav-books");})
+		},
+		updateProfileInfo:function(callback, user){
+			$http.post("http://localhost:8080/book-project/api/users/update", user )
+			.success(function (data){
+				callback(data);
+			})
+			.error(function (data){console.log("ERROR in fav-books");})
+		}
+		
+	}
+}]);

@@ -3,22 +3,27 @@
 <div class="form-group">
         <label class="col-md-2 control-label" >Username</label>
         <div class="col-md-5">
-            <input class="form-control" ng-model="username" name="username" type="text" disabled />
+            <input class="form-control" ng-model="user.username" name="username" type="text" disabled />
         </div> 
     </div>   
     <div class="form-group">
         <label class="col-md-2 control-label" for="fname">First name</label>
         <div class="col-md-5">
-            <input class="form-control"  ng-model="fname" name="fname" type="text" value="" />
+            <input class="form-control"  ng-model="user.fname" name="fname" type="text"  />
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label" for="lname">Last name</label>
         <div class="col-md-5">
-            <input class="form-control"  ng-model="lname" name="lname" type="text" value="" />
+            <input class="form-control"  ng-model="user.lname" name="lname" type="text"  />
         </div>
     </div>
-    
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="biography">Biography</label>
+        <div class="col-md-5">
+            <input class="form-control" rows='3' ng-model="user.biography" name="biography" type="text"  />
+        </div>
+    </div>
     <div class="form-group">
         <label class="col-md-2 control-label" for="exampleInputFile">Choose picture</label>
         <div class="col-md-5">
@@ -28,7 +33,7 @@
     </div> 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Save changes</button>
+            <button type="submit" class="btn btn-default" ng-click="save()">Save changes</button>
         </div>
     </div>
 </form>
