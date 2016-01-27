@@ -32,7 +32,7 @@ var bookProject = angular.module('book-project', [
            controller: "registerCtrl"
        })
        .state("single",{
-           url:"/single",
+           url:"/single/:itemId",
            templateUrl:"views/single.html"
        })
        .state("test",{
@@ -41,13 +41,15 @@ var bookProject = angular.module('book-project', [
        })
        .state("user",{
            url:"/user",
-           templateUrl:"views/user-profile.html"
+           templateUrl:"views/user-profile.html",
+           controller:"userProfile"
        })
        .state("user.edit", {
         views:{
           '@':{
                    url:"/user/edit",
-                   templateUrl:"views/user-profile.edit.html"
+                   templateUrl:"views/user-profile.edit.html",
+                   controller:"userProfileEdit"
               }
         }
        });

@@ -10,7 +10,6 @@ bookProject
 
         $scope.logIn = function(){
             if ($scope.form.$valid) {
-                console.log(usernames);
                 var fd = new FormData();
                 fd.append('username', $scope.username);
                 fd.append('password',$scope.password);
@@ -75,22 +74,52 @@ bookProject
                 loginService.register(fd,$scope);
                     
              }
-            // //POST SO REQUEST ATTRIBUT
-            // postUrl="http://localhost:8080/book-project/api/users/register";
-            // $http({
-            //     method: 'POST',
-            //     url: postUrl,
-            //     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            //     transformRequest: function(obj) {
-            //         var str = [];
-            //         for(var p in obj)
-            //         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            //         return str.join("&");
-            //     },
-            //     data: {username: "asdasd", password:"dasdas"}
-            // }).success(function () {
-            //     console.log("ggwp");
-            // });
        }
     
- }]);
+ }])
+
+.controller("userProfileEdit",[
+            "$scope","$state","userProfileService","loginService","$rootScope",
+    function($scope, $state, userProfileService,loginService,$rootScope){
+        var user = loginService.isloggedUser();
+        $rootScope.loggedIn = loginService.islogged();
+        $scope.user = user;
+
+        $scope.save= function(){
+            if(user){
+                user.lname = $scope.user.lname;
+                user.fname = $scope.user.fname;
+                user.biography = $scope.user.biography;
+                userProfileService.updateProfileInfo(function(data){
+                    sessionStorage.setItem("user",JSON.stringify(data));
+                }, user);
+                $scope.$state = $state;
+                $scope.$watch('$state.$current.locals.globals.save', function (user) {
+                    $scope.user = user;
+                });
+                 $state.go("^");
+            }
+            else
+                $state.go("login");
+        };
+
+}])
+
+.controller("userProfile",[
+            "$scope","$state","userProfileService","loginService","$rootScope",
+    function($scope, $state, userProfileService,loginService,$rootScope){
+        var user = loginService.isloggedUser();
+        $rootScope.loggedIn = loginService.islogged();
+        if(user){
+            console.log(user.fname);
+            $("#profilepic").attr('src', "http://localhost:8080/book-project/api/users/get-image/" + user.id);
+            $scope.user = user.fname + " " + user.lname;
+            $scope.bio = user.biography;
+            $scope.genres = user.genres;
+            userProfileService.getFavBooks(function(data){
+                    $scope.favbooks = data;
+            }, user.id);
+        }
+        else
+            $state.go("login");
+}]);
