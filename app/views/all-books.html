@@ -1,0 +1,72 @@
+<!-- <table width="100%" border="0" cellspacing="0" cellpadding="0" id="catTable" class="tabTable">
+  <thead>
+    <tr  class="productListing-rowheading">
+        <th class="productListing-heading" align="center" scope="col" id="listCell0-0">Book Image</th>
+        <th class="productListing-heading" scope="col" id="listCell0-1">Book info</th>
+    </tr>
+  </thead>
+  <tr ng-repeat="book in books" >
+    <td class="productListing-data" align="center">
+      <a href="">
+        <img ng-src="http://localhost:8080/book-project/api/books/get-image/{{book.id}}" title=" " width="200" height="264" class="listingProductImage" />
+      </a>
+    </td>
+    <td class="productListing-data">
+      <h3 class="itemTitle">
+        <a href="">{{book.title}}</a>
+      </h3>
+      <div class="listingDescription">
+          {{book.description}}
+      </div>
+    </td>
+    
+  </tr>
+
+ 
+</table> -->
+
+
+<table st-table="displayedCollection" st-safe-src="books" class="table table-striped">
+  <thead>
+       <tr>
+        <td colspan="5" class="text-center">
+          <div st-pagination="" st-items-by-page="5" st-displayed-pages="5"></div>
+        </td>
+      </tr>
+
+
+      <th colspan="2">
+          <input st-search="title" placeholder="search with Title" class="input-sm form-control" type="search"/>
+        </th>
+  </thead>
+ 
+  <tbody>
+     <tr ng-repeat="book in displayedCollection" >
+    <td class="productListing-data" align="center">
+      <a href="">
+        <img ng-src="http://localhost:8080/book-project/api/books/get-image/{{book.id}}" title=" " width="200" height="264" class="listingProductImage" />
+      </a>
+    </td>
+    <td class="productListing-data">
+      <h3 class="itemTitle">
+        <a href="">{{book.title}}</a>
+      </h3>
+      <div class="listingDescription">
+          {{book.description}}
+      </div>
+    </td>
+    
+  </tr>
+
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5" class="text-center">
+          <div st-pagination="" st-items-by-page="5" st-displayed-pages="5"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    
+  </table>

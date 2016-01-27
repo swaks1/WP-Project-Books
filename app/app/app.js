@@ -43,6 +43,11 @@ var bookProject = angular.module('book-project', [
            url:"/user",
            templateUrl:"views/user-profile.html"
        })
+        .state("allBooks",{
+           url:"/all-books",
+           templateUrl:"views/all-books.html",
+           controller: "bookCtrl"
+       })
        .state("user.edit", {
         views:{
           '@':{

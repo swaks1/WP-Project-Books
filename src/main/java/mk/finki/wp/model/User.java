@@ -19,6 +19,7 @@ public class User {
 	private String lname;
 	private String username;
 	private String password;
+	@Column(length=10000)
 	private String biography;
 	private String image;
 	@Temporal(TemporalType.DATE)

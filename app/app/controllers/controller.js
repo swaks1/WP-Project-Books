@@ -10,7 +10,7 @@ bookProject
 
         $scope.logIn = function(){
             if ($scope.form.$valid) {
-                console.log(usernames);
+              
                 var fd = new FormData();
                 fd.append('username', $scope.username);
                 fd.append('password',$scope.password);

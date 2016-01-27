@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -68,6 +69,9 @@ public class TestController {
 	
 	@Autowired
 	CommentServiceImpl commentService;
+	
+	@Autowired
+	UserRepository userRepo;
 	
 	
 	Random rand = new Random();
@@ -353,6 +357,15 @@ public class TestController {
 		return "good";		 
 	       
 
+	 }
+	 @RequestMapping(value = "/test/addDates", method = RequestMethod.GET)
+	 public String addDates() {
+		List<User> allUsers = userRepo.findAll();
+		for(User u : allUsers)
+			{u.setDateCreated(new Date());
+			userRepo.saveOrUpdate(u);
+			}
+		return "DONE ADDING DATES";
 	 }
 	 
 	
