@@ -125,7 +125,7 @@ a.span {
 	color:#000033;
 	text-decoration: none;
 }
-.content{
+.bContainerContent{
 	
 	float:left;
 	width:70%;
@@ -133,21 +133,21 @@ a.span {
 	margin-left: 15px;
 	padding-left: 15px;
 }
-.title{
+.bContainerContentTitle{
 	text-align: center;
 	margin-bottom: 40px;
 }
-.genres a,span{
+.bContainerContentGenres>*{
 	float:right;
 	width: 10%;
 
 }
-.desc{
+.bContainerContentDesc{
 	margin-top:20px;
 	float:left;
 	
 }
-.author span{
+.bContainerContentAuthor span{
 	
 	font-size: 1.5em;
 	width: 30%;
