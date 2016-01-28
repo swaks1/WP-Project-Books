@@ -58,6 +58,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ng-hide="loggedIn" ui-sref="register" id="registerLink">Register</a></li>
                     <li><a ng-hide="loggedIn" ui-sref="login" id="loginLink">Log in</a></li>
+                    <li><a ng-show="loggedIn" ui-sref="user" id="profileLink">My profile</a></li>
                     <li><a ng-show="loggedIn" ui-sref="logout" id="logOutLink">Log out</a></li>
                 </ul>
 
