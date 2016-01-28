@@ -1,4 +1,4 @@
-p.ratingview {
+listingDescriptionp.ratingview {
 	color: #000;
 	font-size: 1em;
 	font-weight: 600;
@@ -109,3 +109,48 @@ a.span {
 .tabTable td .listingDescription {padding:5px 0px; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:17px;}
 .tabTable td a {font-size:17px; text-decoration:none; line-height:20px; font-weight:bold; font-family: 'PT Sans Narrow', sans-serif; text-transform:uppercase;}
 .tabTable td a:hover { color:#bbb998;}
+
+
+#bookContainer{
+	height:300px;
+	padding: 10px;
+}
+#bookContainer img{
+	position: relative;
+	float:left;
+	width:25%;
+	height:100%;
+}
+#bookContainer a{
+	color:#000033;
+	text-decoration: none;
+}
+.content{
+	
+	float:left;
+	width:70%;
+	height: 100%;
+	margin-left: 15px;
+	padding-left: 15px;
+}
+.title{
+	text-align: center;
+	margin-bottom: 40px;
+}
+.genres a,span{
+	float:right;
+	width: 10%;
+
+}
+.desc{
+	margin-top:20px;
+	float:left;
+	
+}
+.author span{
+	
+	font-size: 1.5em;
+	width: 30%;
+	float:left;
+	
+}

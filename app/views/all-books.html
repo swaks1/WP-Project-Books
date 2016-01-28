@@ -42,7 +42,7 @@
  
   <tbody>
      <tr ng-repeat="book in displayedCollection" >
-    <td class="productListing-data" align="center">
+  <!--   <td class="productListing-data" align="center">
       <a href="">
         <img ng-src="http://localhost:8080/book-project/api/books/get-image/{{book.id}}" title=" " width="200" height="264" class="listingProductImage" />
       </a>
@@ -54,7 +54,34 @@
       <div class="listingDescription">
           {{book.description}}
       </div>
+    </td> -->
+    <td>
+       <div id="bookContainer">
+          <a href="">
+           <img ng-src="http://localhost:8080/book-project/api/books/get-image/{{book.id}}" title=" " class="" />
+          </a>
+      
+      <div class="content">
+        <div class="title">
+          <a href="#"><h1> {{book.title}}</h1></a>
+        </div>
+        <div class="genres">
+          <a ng-repeat="genre in book.genres" href="">{{genre.genreName}}</a> <span>Genres:</span>
+        </div>
+
+        <div class="desc">
+          <p>{{book.description}}</p>
+        </div>
+
+        <div class="author">
+          <span>Author: <a href="">{{book.author.name}} {{book.author.surname}}</a> </span>
+        </div>      
+      </div>
+    </div>
+
+
     </td>
+
     
   </tr>
 
