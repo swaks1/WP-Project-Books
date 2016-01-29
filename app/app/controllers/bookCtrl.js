@@ -1,7 +1,8 @@
 bookProject
 .controller("bookCtrl",[
-            '$scope','$http','$state','bookService',
-    function($scope, $http, $state,bookService){
+            '$scope','$http','$state','bookService', '$rootScope', 'loginService',
+    function($scope, $http, $state,bookService,$rootScope, loginService){
+    	    $rootScope.loggedIn = loginService.islogged();
     	$scope.genres=[];
     	$scope.genreObj = {};
     	  $scope.books = [];
@@ -40,5 +41,15 @@ bookProject
 		  
 		};
 
-  
  }])
+
+. controller("singleCtrl", ["$stateParams", "$scope", "$rootScope", "bookService","loginService",
+	function($stateParams, $scope, $rootScope,bookService, loginService){
+		$rootScope.loggedIn = loginService.islogged();
+		var bookid = $stateParams.itemId;
+
+		bookService.getBookById(function(data){
+			$scope.book = data;
+		},bookid);
+		//reset(bookid, 'http://localhost:8000/#!single/' + bookid);
+}]);

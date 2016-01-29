@@ -33,7 +33,8 @@ var bookProject = angular.module('book-project', [
        })
        .state("single",{
            url:"/single/:itemId",
-           templateUrl:"views/single.html"
+           templateUrl:"views/single.html",
+           controller:"singleCtrl"
        })
        .state("test",{
            url:"/test",

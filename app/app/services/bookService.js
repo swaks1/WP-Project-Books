@@ -41,6 +41,15 @@ bookProject
 	         error(function (data, status, headers, config) {
 	            console.log("ERROR in genres");
 	        }); 
+		},
+		getBookById: function(callback, bookid){
+			$http.get("http://localhost:8080/book-project/api/books/" + bookid)
+			.success(function (data, status, headers, config){
+				callback(data);
+			})
+			.error(function (data, status, headers, config) {
+	            console.log("ERROR in bookid");
+	        }); 
 		}
 	}
 }]);
