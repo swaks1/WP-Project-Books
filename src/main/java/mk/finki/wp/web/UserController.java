@@ -139,7 +139,7 @@ public class UserController {
 						 HttpServletRequest request) 
 	 {
 		User user = new User();
-		user =  userService.createUser(fname, lname, username, password, biography, "");
+		user =  userService.createUser(fname, lname, username, password, biography, "default.jpg");
        
 		if (file != null && !file.isEmpty()) {
 			

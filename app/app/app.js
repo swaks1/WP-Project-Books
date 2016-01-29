@@ -49,6 +49,11 @@ var bookProject = angular.module('book-project', [
            templateUrl:"views/all-books.html",
            controller: "bookCtrl"
        })
+       .state("authorInfo",{
+           url:"/author-info/:authorId",
+           templateUrl:"views/author-info.html",
+           controller: "authorCtrl"
+       })
        .state("user.edit", {
         views:{
           '@':{

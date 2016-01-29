@@ -14,7 +14,10 @@
         <span ng-model="bio">{{bio}}</span></p>
     <br>
      <p class="text-left"><strong>Favorite books: </strong><br></p>
-     <p ng-repeat="fb in favbooks" style="display: inline-block;"><a ui-sref="single({itemId:fb.id})"><img  class="img-responsive" src="http://localhost:8080/book-project/api/books/get-image/{{fb.id}}" style=" height: 250px; display: inline-block; margin-right: 20px;" ></a></p>
+     <div>
+         <p ng-repeat="fb in favbooks" style="display: inline-block;"><a ui-sref="single({itemId:fb.id})"><img  class="img-responsive" src="http://localhost:8080/book-project/api/books/get-image/{{fb.id}}" style=" height: 250px; display: inline-block; margin-right: 20px;" ></a></p>
+     </div>
+    
     </center>
 </div>
            

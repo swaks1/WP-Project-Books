@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -137,9 +138,9 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/by-genre", method = RequestMethod.POST)
-	public ResponseEntity<?> getBooksByGenre(@RequestParam List<Long> genres){
-		
-		List<Book> books = bookService.findAllBooksByGenres(genres);
+	public ResponseEntity<?> getBooksByGenre(@RequestBody helperClass HC){
+		printJson(HC);
+		List<Book> books = bookService.findAllBooksByGenres(HC.getGenreIds());
 		return new ResponseEntity<List<Book>>(books,HttpStatus.OK);
 		
 	}
