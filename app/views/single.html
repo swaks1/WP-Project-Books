@@ -51,66 +51,12 @@
                         <hr>
 							
 							<!-- comments-section-starts -->
-	    
 
+<dir-disqus disqus-shortname="bookpr"
+            disqus-identifier="#!single/{{book.id}}"
+            disqus-url="http://localhost:8000/#!single/{{book.id}}"
+            ready-to-bind="{{ contentLoaded }}">
+</dir-disqus>
 
-
-<!-- <div id="disqus_thread"></div>
-<script>
-/**
-* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-*/
-var disqus_shortname = 'bookproject',
-    disqus_identifier = 'bookproject';
-
-var disqus_config = function ($stateParams) {
-this.page.url = window.location.href; // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = window.location.hash; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-
- // DON'T EDIT BELOW THIS LINE
- (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.assync = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-
-/* * * Disqus Reset Function * * */
-     var reset = function (newIdentifier, newUrl) {
-        DISQUS.reset({
-            reload: true,
-            config: function () {
-                this.page.identifier = newIdentifier;
-                this.page.url = newUrl;
-            }
-        });
-    };
-
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
- -->
 	  <!-- comments-section-ends -->
-<!-- 		  <div class="reply-section">
-			  <div class="reply-section-head">
-				  <div class="reply-section-head-text">
-					  <h3>Leave Reply</h3>
-				  </div>
-			  </div> 
-			<div class="blog-form">
-                <form>
-                <div class="form-group">
-                    <label for="">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <label for="">Review</label>
-                    <textarea class="form-control" rows="3" style="resize: none;"></textarea>
-                </div>
-                
-                <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-			 </div>
-		  </div> -->
 		  </div>

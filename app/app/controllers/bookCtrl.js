@@ -47,9 +47,14 @@ bookProject
 	function($stateParams, $scope, $rootScope,bookService, loginService){
 		$rootScope.loggedIn = loginService.islogged();
 		var bookid = $stateParams.itemId;
+		$scope.contentLoaded = false;
+
 
 		bookService.getBookById(function(data){
 			$scope.book = data;
+			$scope.contentLoaded = true;
+			console.log($scope.url);
 		},bookid);
-		//reset(bookid, 'http://localhost:8000/#!single/' + bookid);
+
+
 }]);
