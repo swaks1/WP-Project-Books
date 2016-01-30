@@ -90,7 +90,7 @@ bookProject
 	}
 
 })
-.factory("userProfileService",["$http", "loginService", function($http, loginService){
+.factory("userProfileService",["$http", "loginService","$state", function($http, loginService,$state){
 	return{
 		getFavBooks:function(callback, userid){
 			$http.get("http://localhost:8080/book-project/api/fav-books/of-user/" + userid)
@@ -105,6 +105,19 @@ bookProject
 				callback(data);
 			})
 			.error(function (data){console.log("ERROR in fav-books");})
+		},
+		getUsers: function(callback){
+			$http.get("http://localhost:8080/book-project/api/users")
+			.success(function (data){
+				callback(data);
+			})
+			.error(function (data){
+				console.log("ERROR in getting USERS");
+			})
+		},
+		viewUser: function(id){
+				//TO DO view USER PAGE
+			$state.go('single',{"itemId":id});
 		}
 		
 	}

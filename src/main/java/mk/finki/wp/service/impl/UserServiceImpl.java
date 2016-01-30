@@ -113,10 +113,16 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findByUsername(username).get(0);
 	}
 
-	@Override
 	public List<String> findAllUsernames() {
 		return userRepo.findAllUsernames();
 	}
+
+	@Override
+	public List<User> findAllUsers() {
+		return userRepo.findAll();
+	}
+
+	
 
 
 }

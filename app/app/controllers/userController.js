@@ -1,6 +1,44 @@
 bookProject
-.controller('headerCtrl', function ($rootScope, loginService) { 
+.controller('headerCtrl', function ($rootScope, loginService,userProfileService) { 
     $rootScope.loggedIn = loginService.islogged();
+    
+
+    //za AUTO COMPELTE
+     autocompleteUsers = [];
+    userProfileService.getUsers(function(data){
+        var people = data;
+       
+        $(people).each(function(index,item){
+            autocompleteUsers.push({
+                id:item.id,
+                label:item.fname + " "+item.lname,
+                date:item.dateCreated
+            })
+        });
+        //console.log(autocompleteUsers);
+              $( "#autocomplete").autocomplete({
+                        minLength: 0,
+                        source: autocompleteUsers,
+                        focus: function( event, ui ) {
+                          $( "#autocomplete" ).val( ui.item.label );
+                          return false;
+                        },
+                        select: function( event, ui ) {
+                            userProfileService.viewUser(ui.item.id);
+                   
+                          return false;
+                        }
+                      })
+                      .autocomplete( "instance" )._renderItem = function( ul, item ) {
+                         var icon = $("<img>").attr("src","http://localhost:8080/book-project/api/users/get-image/"+item.id);
+                        icon.attr("style","width:40px; height:40px; float:left; display:block");
+
+                        return $( "<li style='height:50px'>" )
+                          .append(icon).append( "<a>" + item.label + "<br>" + "" + "</a>" )
+                          .appendTo( ul );
+                      };
+
+    });
 })
 
 .controller("loginCtrl",[
@@ -125,3 +163,5 @@ bookProject
         else
             $state.go("login");
 }]);
+
+

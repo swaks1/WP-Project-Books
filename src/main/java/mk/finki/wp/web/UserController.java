@@ -31,6 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import mk.finki.wp.model.User;
 
 import mk.finki.wp.service.UserService;
+import mk.finki.wp.service.impl.UserServiceImpl;
 	
 	//moze da se koristi za CORS  (1.5 hours wasted for nothing )
  //@CrossOrigin(origins = "http://localhost:8000", maxAge = 3600)
@@ -39,9 +40,17 @@ import mk.finki.wp.service.UserService;
 public class UserController {
 	
 	@Autowired
-	UserService userService; 
+	UserServiceImpl userService; 
 	
-
+	
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ResponseEntity<?> getUsers(){
+		
+		List<User> users =  userService.findAllUsers();
+		return new ResponseEntity<List<User>>(users,HttpStatus.OK);
+		
+		}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<User> getUserById(@PathVariable Long id){
 		
