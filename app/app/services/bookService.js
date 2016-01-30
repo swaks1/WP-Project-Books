@@ -52,4 +52,25 @@ bookProject
 	        }); 
 		}
 	}
+}])
+.factory('favBookService',['$http', function($http){
+	return{
+		toggleFavBook: function(callback,data){
+			$http.post('http://localhost:8080/book-project/api/fav-books/toggle-to-user',data, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+               }).success(function(data){
+               		callback(data);
+               }).error(function(data){}); 
+		},
+
+		getFavBookState: function(callback, userId , bookId){
+			var params = "userId=" + userId + "&bookId=" + bookId;
+			$http.get('http://localhost:8080/book-project/api/fav-books/get-favbook-state?' + params )
+			.success(function(data){
+               		callback(data);
+               }).error(function(data){}); 
+		}
+	}
+
 }]);

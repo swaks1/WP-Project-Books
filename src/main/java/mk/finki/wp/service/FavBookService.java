@@ -15,4 +15,6 @@ public interface FavBookService {
 	public List<Book> findAllBooksByUser(Long userId);
 	public Boolean deleteFavBook(User user, Book book);
 	public Boolean deleteFavBook(Long userId, Long bookId);
+	public Boolean toggleFavBook(Long userId, Long bookId);
+	public Boolean toggleStateFavBook(Long userId, Long bookId);
 }

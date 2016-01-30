@@ -52,4 +52,22 @@ public class FavBookController {
 			return new ResponseEntity<String>("FAILED TO DELETE", HttpStatus.OK);
 		
 	}
+	
+	@RequestMapping(value = "/toggle-to-user", method = RequestMethod.POST)
+	public ResponseEntity<?> toggleFavBookToUser( @RequestParam Long userId,
+											@RequestParam Long bookId){
+		
+		boolean favBookbool = favBookService.toggleFavBook(userId, bookId);
+		return new ResponseEntity<Boolean>(favBookbool, HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value = "/get-favbook-state", method = RequestMethod.GET)
+	public ResponseEntity<?> getToggleStateFavBookToUser( @RequestParam Long userId,
+											@RequestParam Long bookId){
+		
+		boolean favBookbool = favBookService.toggleStateFavBook(userId, bookId);
+		return new ResponseEntity<Boolean>(favBookbool, HttpStatus.OK);
+		
+	}
 }

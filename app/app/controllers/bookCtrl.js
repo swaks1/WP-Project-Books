@@ -43,18 +43,33 @@ bookProject
 
  }])
 
-. controller("singleCtrl", ["$stateParams", "$scope", "$rootScope", "bookService","loginService",
-	function($stateParams, $scope, $rootScope,bookService, loginService){
+. controller("singleCtrl", ["$stateParams", "$scope", "$rootScope", "bookService","loginService","favBookService",
+	function($stateParams, $scope, $rootScope,bookService, loginService,favBookService){
 		$rootScope.loggedIn = loginService.islogged();
-		var bookid = $stateParams.itemId;
+		var bookId = $stateParams.itemId;
+		var userId = loginService.isloggedUser().id;
 		$scope.contentLoaded = false;
 
 
-		bookService.getBookById(function(data){
+		bookService.getBookById(function (data){
 			$scope.book = data;
 			$scope.contentLoaded = true;
 			console.log($scope.url);
-		},bookid);
+		},bookId);
 
+		favBookService.getFavBookState(function (data){
+			$scope.isliked = data;
+			console.log($scope.isliked);
+		},userId, bookId);
+
+		$scope.toggle = function(){
+			var fd = new FormData();
+	            fd.append('userId', userId);
+	            fd.append('bookId',bookId);
+			favBookService.toggleFavBook(function (data){
+				$scope.isliked = data;
+				console.log(data);
+			}, fd);
+		}
 
 }]);

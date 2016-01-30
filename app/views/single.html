@@ -7,7 +7,9 @@
 								<img src="http://localhost:8080/book-project/api/books/get-image/{{book.id}}" class="img-responsive" alt="" />
 							</div>
 							<div class="review-info">
-								<a class="span" ><i>{{book.title}}</i></a>
+								<p class="span" ><i>{{book.title}}</i></p>
+								<img ng-show="isliked" src="/views/images/like.jpg" ng-click="toggle();" class='like'/>
+								<img ng-hide="isliked" src="/views/images/unlike.jpg" ng-click="toggle();" class='like'/>
 								<p class="dirctr">by&nbsp;<a ui-sref="authorInfo({authorId:book.author.id})">{{book.author.name}}&nbsp; {{book.author.surname}}</a></p>
 
 								<div class="clearfix"></div>

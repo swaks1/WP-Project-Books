@@ -85,11 +85,15 @@ p.dirctr a {
 	font-weight:400;
 	font-size:0.95em;
 }
-a.span {
+p.span {
     color: #000;
     font-size: 1.8em;
     text-decoration: none;
     font-weight: 600;
+    display: inline-block;
+}
+.like{
+	height: 30px;
 }
 
 .tabTable .price, .tabTable .productSpecialPrice, .tabTable .normalprice{ font-family:'Devonshire', sans-serif;

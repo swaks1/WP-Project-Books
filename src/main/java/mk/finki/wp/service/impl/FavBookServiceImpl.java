@@ -89,5 +89,25 @@ public class FavBookServiceImpl implements FavBookService {
 		Book book = bookRepo.findBookById(bookId);
 		return deleteFavBook(user, book);
 	}
+	
+	@Override
+	public Boolean toggleFavBook(Long userId, Long bookId) {
+		User user = userRepo.findById(User.class, userId);
+		Book book = bookRepo.findBookById(bookId);
+		if( deleteFavBook(user, book))
+			return false;
+		else
+		{
+			createFavBook(user, book);
+			return true;
+		}
+	}
+	
+	@Override
+	public Boolean toggleStateFavBook(Long userId, Long bookId) {
+		User user = userRepo.findById(User.class, userId);
+		Book book = bookRepo.findBookById(bookId);
+		return hasBook(user, book);
+	}
 
 }
