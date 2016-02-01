@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findAllUsernames();
 	}
 
-	@Override
+	
 	public List<User> findAllUsers() {
 		return userRepo.findAll();
 	}

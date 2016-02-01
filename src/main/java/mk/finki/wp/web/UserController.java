@@ -47,6 +47,7 @@ public class UserController {
 	public ResponseEntity<?> getUsers(){
 		
 		List<User> users =  userService.findAllUsers();
+		
 		return new ResponseEntity<List<User>>(users,HttpStatus.OK);
 		
 		}

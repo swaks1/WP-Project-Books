@@ -1,0 +1,10 @@
+<div class="modal-body">
+   
+   
+        <div class="searchResult"  ng-repeat="user in matchedUsers" ui-sref="visitUser({ userId: {{user.id}} })">
+            <img   ng-src="http://localhost:8080/book-project/api/users/get-image/{{user.id}}">
+            <h1> {{user.label}} </h1>
+            <div class="clearfix"></div>
+        </div>
+  
+</div>

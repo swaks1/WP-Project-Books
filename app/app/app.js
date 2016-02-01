@@ -46,6 +46,16 @@ var bookProject = angular.module('book-project', [
            templateUrl:"views/user-profile.html",
            controller:"userProfile"
        })
+       .state("visitUser",{
+           url:"/visit-user/:userId",
+           templateUrl:"views/visit-user.html",
+           controller: "visitUserCtrl"
+       })
+       .state("searchUsers",{
+           url:"/search-users",
+           templateUrl:"views/search-users.html",
+           controller: "headerCtrl"
+       })
         .state("allBooks",{
            url:"/all-books",
            templateUrl:"views/all-books.html",

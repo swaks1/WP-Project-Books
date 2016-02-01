@@ -158,3 +158,21 @@ p.span {
 	float:left;
 	
 }
+.searchResult{
+	width: 50%;
+	/*border:1px solid black;*/
+	text-align: center;
+	margin-bottom: 30px;
+	height: 70px;
+	cursor: pointer;
+}
+.searchResult > img{
+	display: block;
+	width:70px;
+	height: 70px;
+	float: left;
+}
+.searchResult > h1{
+	float: left;
+	margin-left: 30px;
+}

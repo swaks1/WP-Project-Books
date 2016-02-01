@@ -115,9 +115,18 @@ bookProject
 				console.log("ERROR in getting USERS");
 			})
 		},
+		getUserById: function(callback,userId){
+			$http.get("http://localhost:8080/book-project/api/users/"+userId)
+			.success(function (data){
+				callback(data);
+			})
+			.error(function (data){
+				console.log("ERROR in getting User by ID");
+			})
+		},
 		viewUser: function(id){
 				//TO DO view USER PAGE
-			$state.go('single',{"itemId":id});
+			$state.go('visitUser',{"userId":id});
 		}
 		
 	}

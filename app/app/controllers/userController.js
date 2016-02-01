@@ -1,21 +1,24 @@
 bookProject
-.controller('headerCtrl', function ($rootScope, loginService,userProfileService) { 
+.controller('headerCtrl', function ($scope,$rootScope,$state, loginService,userProfileService) { 
     $rootScope.loggedIn = loginService.islogged();
-    
+        
+    $( "#autocomplete").val("");
+   
 
     //za AUTO COMPELTE
-     autocompleteUsers = [];
+    $rootScope.allUsers = [];
     userProfileService.getUsers(function(data){
         var people = data;
        
         $(people).each(function(index,item){
-            autocompleteUsers.push({
+            $rootScope.allUsers.push({
                 id:item.id,
                 label:item.fname + " "+item.lname,
                 date:item.dateCreated
             })
         });
-        //console.log(autocompleteUsers);
+        
+        var autocompleteUsers = $rootScope.allUsers; 
               $( "#autocomplete").autocomplete({
                         minLength: 0,
                         source: autocompleteUsers,
@@ -39,6 +42,29 @@ bookProject
                       };
 
     });
+
+    // za klik na kopceto SEARCH
+  $rootScope.searchUser = function(){
+        var text = $("#autocomplete").val();
+        var users = $rootScope.allUsers;
+         $rootScope.matchedUsers = [];
+
+        $(users).each(function(index,item){       
+            if(item.label.toLowerCase().indexOf(text.toLowerCase()) != -1){
+                $rootScope.matchedUsers.push(item);
+                return;
+            }
+       
+        });
+
+        $state.go('searchUsers');
+       
+
+        
+    };
+
+   
+   
 })
 
 .controller("loginCtrl",[
@@ -161,6 +187,25 @@ bookProject
         }
         else
             $state.go("login");
-}]);
+}])
+.controller("visitUserCtrl",[
+            "$scope","$state","$stateParams","userProfileService",
+    function($scope, $state, $stateParams,userProfileService){
+       
+        var userId = $stateParams.userId;
+         $scope.visitedUser = "";
+
+        userProfileService.getUserById(function(data){
+            $scope.visitedUser = data;
+            $("#profilepic").attr('src', "http://localhost:8080/book-project/api/users/get-image/" + userId);
+
+            userProfileService.getFavBooks(function(data){
+                    $scope.visitedUser.favbooks = data;
+            },userId);
+
+        },userId);
+
+}])
+;
 
 

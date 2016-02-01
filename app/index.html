@@ -15,7 +15,7 @@
 
   <!-- Concatenated CSS -->
   <link href="dest/lib.css?rev=ce521111498417454cb372b05cbd5f4d" rel="stylesheet">
-  <link href="dest/app.css?rev=24486a9a5d2ffee27ad8192e055e2cd8" rel="stylesheet">
+  <link href="dest/app.css?rev=8e97fa1199627f7f2b00ad4b41a1410e" rel="stylesheet">
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
 
@@ -47,16 +47,16 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a ui-sref="home">Home</a></li>
-                    <li><a ui-sref="user">Test</a></li>
+                    <li><a ui-sref="user">UserProfile</a></li>
                      <li><a ui-sref="allBooks">Books</a></li>
-                    <li><a ui-sref="single({itemId:7})" >Contact</a></li>
+                    <li><a ui-sref="visitUser({userId:1})" >VisitUser</a></li>
                 </ul>
                 <div class="col-sm-3 col-md-3">
                     <form class="navbar-form" role="search">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search"  id="autocomplete" name="q">
                         <div class="input-group-btn">
-                            <button class="btn btn-default " type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            <button class="btn btn-default " ng-click="searchUser()"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
                     </div>
                     </form>
@@ -99,10 +99,10 @@
 <script src="dest/lib.js?rev=f7d956fbc56af95f014e3e68a80c8deb"></script>
 <!-- Concatenated application -->
 
-<script src="dest/src.js?rev=20d5e5bd9211f012899f291c81bcef0b"></script>
+<script src="dest/src.js?rev=1c71f5181778b50b8d3566fb4bb29c19"></script>
 
 <!-- All html templates -->
-<script src="dest/templates.js?rev=4c6e8062f3fff895fcb3e1703b6b9a36"></script>
+<script src="dest/templates.js?rev=db703e444098bad9d1044d08a16cf64b"></script>
 
 
 <!-- za jQuery UI STAVENI-->
