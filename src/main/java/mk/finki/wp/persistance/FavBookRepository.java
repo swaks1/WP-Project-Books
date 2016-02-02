@@ -60,8 +60,9 @@ public class FavBookRepository {
 	
 	@Transactional
 	public Integer deleteFavBook(User user, Book book) {
-		Query query = em.createQuery("DELETE FROM FavBook b WHERE b.origin.id=?1");
+		Query query = em.createQuery("DELETE FROM FavBook b WHERE b.origin.id=?1 and b.user.id=?2");
 		query.setParameter(1, book.getId());
+		query.setParameter(2, user.getId());
 		Integer num = query.executeUpdate();
 		return num;
 	}

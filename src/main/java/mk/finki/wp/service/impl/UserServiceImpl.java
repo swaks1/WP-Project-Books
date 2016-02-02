@@ -112,8 +112,7 @@ public class UserServiceImpl implements UserService {
 		
 		return userRepo.findByUsername(username).get(0);
 	}
-
-	public List<String> findAllUsernames() {
+	public List<String> findAllUsernames(){
 		return userRepo.findAllUsernames();
 	}
 
