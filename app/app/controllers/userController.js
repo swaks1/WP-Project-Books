@@ -23,11 +23,12 @@ bookProject
                         minLength: 0,
                         source: autocompleteUsers,
                         focus: function( event, ui ) {
-                          $( "#autocomplete" ).val( ui.item.label );
+                          //$( "#autocomplete" ).val( ui.item.label );
                           return false;
                         },
                         select: function( event, ui ) {
                             userProfileService.viewUser(ui.item.id);
+                            $( "#autocomplete" ).val( ui.item.label );
                    
                           return false;
                         }
