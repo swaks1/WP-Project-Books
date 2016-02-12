@@ -90,7 +90,7 @@ var  MODULE_NAME = 'book-project';
 /**
 * The URL of the back-end API
 */
-var API_URL = 'http://localhost:8080/api';
+var API_URL = 'http://localhost:8080/book-project';
 /**
 * Route to which the API calls will be mapped 
 */

@@ -44,7 +44,8 @@ var bookProject = angular.module('book-project', [
        .state("user",{
            url:"/user",
            templateUrl:"views/user-profile.html",
-           controller:"userProfile"
+           controller:"userProfile",
+           params : {obj : null}
        })
        .state("visitUser",{
            url:"/visit-user/:userId",

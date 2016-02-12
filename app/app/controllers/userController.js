@@ -58,12 +58,8 @@ bookProject
         });
 
         $state.go('searchUsers');
-       
-
         
-    };
-
-   
+    };  
    
 })
 
@@ -159,10 +155,7 @@ bookProject
                     sessionStorage.setItem("user",JSON.stringify(data));
                 }, user);
                 $scope.$state = $state;
-                $scope.$watch('$state.$current.locals.globals.save', function (user) {
-                    $scope.user = user;
-                });
-                 $state.go("^");
+                $state.go("^", { obj : user});
             }
             else
                 $state.go("login");
@@ -171,12 +164,16 @@ bookProject
 }])
 
 .controller("userProfile",[
-            "$scope","$state","userProfileService","loginService","$rootScope",
-    function($scope, $state, userProfileService,loginService,$rootScope){
+            "$scope","$state","userProfileService","loginService","$rootScope",'$stateParams',
+    function($scope, $state, userProfileService,loginService,$rootScope,$stateParams){
         var user = loginService.isloggedUser();
         $rootScope.loggedIn = loginService.islogged();
+        if($stateParams.obj)
+        {
+            user = $stateParams.obj;
+        }
         if(user){
-            console.log(user.fname);
+            console.log($stateParams.obj);
             $("#profilepic").attr('src', "http://localhost:8080/book-project/api/users/get-image/" + user.id);
             $scope.user = user.fname + " " + user.lname;
             $scope.bio = user.biography;
