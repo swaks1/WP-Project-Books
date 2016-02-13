@@ -1,7 +1,7 @@
 bookProject
 .controller('headerCtrl', function ($scope,$rootScope,$state, loginService,userProfileService) { 
     $rootScope.loggedIn = loginService.islogged();
-        
+    $rootScope.loggedUser = loginService.isloggedUser();
     $( "#autocomplete").val("");
    
     console.log("HEADER CTRL");
@@ -203,6 +203,7 @@ bookProject
 
         },userId);
 
+        //console.log(initComment);
 
 
 

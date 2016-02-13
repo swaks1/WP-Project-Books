@@ -176,3 +176,40 @@ p.span {
 	float: left;
 	margin-left: 30px;
 }
+
+
+  .comment{
+    border:1px solid black;
+    border-radius: 10px;
+    overflow: auto;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+    background-color: #EDFAFD;
+  }
+  .comment img{
+    display:block;
+    float:left;
+    width:100px;
+    height:100px;
+    margin-right: 50px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+    .comment h2{
+    cursor: pointer;
+  }
+  .commentList{
+    background-color: #E9DCCD;
+    padding:20px;
+  }
+  .commentForm textarea{
+    width:300px;
+    height:150px;
+  }
+  .commentForm #author{
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+.addComment{
+	display: block;
+}

@@ -8,7 +8,8 @@ var bookProject = angular.module('book-project', [
   'angular-loading-bar',
   'ui.select',
   'ngQuickDate',
-  'angularUtils.directives.dirDisqus'])
+  'angularUtils.directives.dirDisqus',
+  'react'])
   .config(['$stateProvider', '$urlRouterProvider','$locationProvider',
          function($stateProvider, $urlRouterProvider,$locationProvider){
        $urlRouterProvider.otherwise("/");
