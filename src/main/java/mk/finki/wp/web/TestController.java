@@ -216,17 +216,17 @@ public class TestController {
 	//test za Comment
 	@RequestMapping("/test4")
 	public ResponseEntity<Object> getObj4(){
-		User user1 = userService.findUserById(20L);
-		Book book1 = bookService.findBookById(10L);
+		User user1 = userService.findUserById(2L);
+
 		
-		User user2 = userService.createUser("Igor", "nikolov", "i", "n", "21", "12");
-		Book book2 = bookService.findBookById(11L);
+		User user2 = userService.findUserById(1L);
+	
 		
-		Comment comment = commentService.createComment(user1, book1, "Ova e dobra kniga.");
-		Comment comment2 = commentService.createComment(user2, book2, "Ova e 13131 .");
+		Comment comment = commentService.createComment(user1, user2, "Ova e dobra kniga.");
+		Comment comment2 = commentService.createComment(user2, user1, "Ova e 13131 .");
 			
-		List<Comment> komentariOdKniga = commentService.findAllCommentsByBook(book2);
-		printJson(komentariOdKniga);
+		List<Comment> komentariOdUser = commentService.findAllCommentsOfUser(2L);
+		printJson(komentariOdUser);
 		
 		comment = commentService.findCommentById(2L);
 		commentService.UpdateComment("NOV KOMENTAR", comment);

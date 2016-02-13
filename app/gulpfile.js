@@ -29,6 +29,7 @@ var CSS_LIB = [
     'bower_components/ngQuickDate/dist/ng-quick-date-plus-default-theme.css',
     'bower_components/angular-bootstrap-colorpicker/css/colorpicker.css',
     'bower_components/angular-xeditable/dist/css/xeditable.css'
+
 ];
 
 var CSS_APP = [
@@ -67,6 +68,7 @@ var JS_LIB = [
     'bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
     'bower_components/angular-bootstrap-switch/dist/angular-bootstrap-switch.min.js',
     'bower_components/angular-xeditable/dist/js/xeditable.js'
+
 ];
 
 var JS_APP = [

@@ -17,6 +17,9 @@ public class CommentServiceImpl implements CommentService{
 	
 	@Autowired
 	CommentRepository commentRepo;
+	
+	@Autowired
+	UserServiceImpl userService;
 
 	@Override
 	public Comment saveOrUpdateComment(Comment entity) {
@@ -33,14 +36,10 @@ public class CommentServiceImpl implements CommentService{
 		return commentRepo.findAllComments();
 	}
 
-	@Override
-	public List<Comment> findAllCommentsByBook(Book book) {
-		return commentRepo.findAllCommentsByBook(book);
-	}
 
 	@Override
-	public Integer deleteComment(Comment comment) {
-		return commentRepo.deleteComment(comment);
+	public Integer deleteComment(Long commentId) {
+		return commentRepo.deleteComment(commentId);
 	}
 
 	@Override
@@ -52,13 +51,25 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public Comment createComment(User user, Book book, String text) {
+	public Comment createComment(User userFrom, User userTo, String text) {
 		Comment comment = new Comment();
-		comment.setBook(book);
-		comment.setUser(user);
+		comment.setUserFrom(userFrom);
+		comment.setUserTo(userTo);
 		comment.setComment(text);
 		comment.setDateCreated(new Date());
 		return saveOrUpdateComment(comment);
+	}
+
+	@Override
+	public List<Comment> findAllCommentsOfUser(Long userId) {
+		return commentRepo.findAllCommentsOfUser(userId);
+	}
+
+	@Override
+	public Comment createComment(Long userFrom, Long userTo, String text) {
+		User userF = userService.findUserById(userFrom);
+		User userT = userService.findUserById(userTo);
+		return createComment(userF, userT, text);
 	}
 
 }

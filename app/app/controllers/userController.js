@@ -4,7 +4,7 @@ bookProject
         
     $( "#autocomplete").val("");
    
-
+    console.log("HEADER CTRL");
     //za AUTO COMPELTE
     $rootScope.allUsers = [];
     userProfileService.getUsers(function(data){
@@ -175,7 +175,7 @@ bookProject
         }
         if(user){
             console.log($stateParams.obj);
-            $("#profilepic").attr('src', "http://localhost:8080/book-project/api/users/get-image/" + user.id);
+            $scope.userId= user.id;
             $scope.user = user.fname + " " + user.lname;
             $scope.bio = user.biography;
             $scope.genres = user.genres;
@@ -195,7 +195,7 @@ bookProject
 
         userProfileService.getUserById(function(data){
             $scope.visitedUser = data;
-            $("#profilepic").attr('src', "http://localhost:8080/book-project/api/users/get-image/" + userId);
+           // $("#profilepic").attr('src', "http://localhost:8080/book-project/api/users/get-image/" + userId);
 
             userProfileService.getFavBooks(function(data){
                     $scope.visitedUser.favbooks = data;
@@ -203,7 +203,9 @@ bookProject
 
         },userId);
 
+
+
+
 }])
 ;
-
 

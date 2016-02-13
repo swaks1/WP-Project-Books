@@ -20,10 +20,10 @@ public class Comment {
 	private Long id;
 	
 	@ManyToOne
-	private User user;
+	private User userFrom;
 	
 	@ManyToOne
-	private Book book;
+	private User userTo;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dateCreated;
@@ -31,6 +31,20 @@ public class Comment {
 	@Column(length=10000)
 	private String comment;
 	
+	public User getUserFrom() {
+		return userFrom;
+	}
+	public void setUserFrom(User userFrom) {
+		this.userFrom = userFrom;
+	}
+
+	public User getUserTo() {
+		return userTo;
+	}
+	public void setUserTo(User userTo) {
+		this.userTo = userTo;
+	}
+
 	public String getComment() {
 		return comment;
 	}
@@ -43,18 +57,7 @@ public class Comment {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public Book getBook() {
-		return book;
-	}
-	public void setBook(Book book) {
-		this.book = book;
-	}
+	
 	public Date getDateCreated() {
 		return dateCreated;
 	}

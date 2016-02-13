@@ -48,20 +48,23 @@ public class CommentRepository {
 		
 	}
 	
-	public List<Comment> findAllCommentsByBook(Book book){
-		TypedQuery<Comment> query = em.createQuery("SELECT c FROM Comment c WHERE c.book.id=?1"
-								,Comment.class);
-		query.setParameter(1, book.getId());
-		List <Comment> results = query.getResultList();
-		return results;
-	}
+	
 	
 	@Transactional
-	public Integer deleteComment(Comment comment) {
+	public Integer deleteComment(Long commentId) {
 		Query query = em.createQuery("DELETE FROM Comment c WHERE c.id=?1");
-		query.setParameter(1,comment.getId());
+		query.setParameter(1,commentId);
 		Integer num = query.executeUpdate();
 		return num;
+	}
+
+	public List<Comment> findAllCommentsOfUser(Long userId) {
+			TypedQuery<Comment> query = em.createQuery("SELECT c FROM Comment c WHERE c.userTo.id=?1"
+									,Comment.class);
+			query.setParameter(1, userId);
+			List <Comment> results = query.getResultList();
+			return results;
+		
 	}
 	
 

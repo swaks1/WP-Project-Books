@@ -3,7 +3,7 @@
 
 <div class="modal-body">
     <center>
-    <img  id="profilepic"  name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+    <img  id="profilepic"  ng-src="http://localhost:8080/book-project/api/users/get-image/{{userId}}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
     <h3 class="media-heading" ng-model="user">{{user}}&nbsp;<small><a ui-sref="user.edit">(Edit profile)</a></small></h3>
     <span><strong>Favorite genres: </strong></span>
         <span class="label label-info"  ng-repeat="g in genres" style="margin-right: 7px;">{{g.genreName}}</span>      
@@ -15,7 +15,7 @@
     <br>
      <p class="text-left"><strong>Favorite books: </strong><br></p>
      <div>
-         <p ng-repeat="fb in favbooks" style="display: inline-block;"><a ui-sref="single({itemId:fb.id})"><img  class="img-responsive" src="http://localhost:8080/book-project/api/books/get-image/{{fb.id}}" style=" height: 250px; display: inline-block; margin-right: 20px;" ></a></p>
+         <p ng-repeat="fb in favbooks" style="display: inline-block;"><a ui-sref="single({itemId:fb.id})"><img  class="img-responsive" ng-src="http://localhost:8080/book-project/api/books/get-image/{{fb.id}}" style=" height: 250px; display: inline-block; margin-right: 20px;" ></a></p>
      </div>
     
     </center>

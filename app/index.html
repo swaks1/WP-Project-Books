@@ -32,7 +32,7 @@
   <![endif]-->
 </head>
 
-<body ng-app="book-project" ng-cloak class="ng-cloak">
+<body ng-app="book-project" ng-cloak class="ng-cloak" ng-controller="headerCtrl">
   
 <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -88,6 +88,7 @@
         <hr />
         <footer>
             <p>&copy; 2016 - Book Project</p>
+            
         </footer>
     </div>
 
@@ -96,18 +97,188 @@
 
 
 <!-- Concatenated libraries -->
-<script src="dest/lib.js?rev=8444f001d59fe0e2558b9ce7614fc28d"></script>
+<script src="dest/lib.js?rev=3c1d829471c504686588fa5118ab61c1"></script>
 <!-- Concatenated application -->
 
-<script src="dest/src.js?rev=c319afa7f64ce9d92658a5f28b8358b2"></script>
+<script src="dest/src.js?rev=6fd83b8eaa57c84ea2f2e03ff4bfffdd"></script>
 
 <!-- All html templates -->
-<script src="dest/templates.js?rev=091ed89f89abe3325bfd840f16c41ecf"></script>
+<script src="dest/templates.js?rev=727a5ebf51c1cd5b765f4e7496b8225b"></script>
 
 
 <!-- za jQuery UI STAVENI-->
 <script src="jQueryUI/jquery.js"></script>
   <script src="jQueryUI/jquery-ui.min.js"></script>
 
+ <script src="bower_components/react/react.js"></script>
+<script src="bower_components/react/react-dom.js"></script>
+<script src="bower_components/ngReact/ngReact.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+  
+
+
+  
+
+
 </body>
+
+
+
+<div>
+
+    <div id="contentReact"></div>
+    <!-- <script type="text/babel" src="src/helloworld.js"></script> -->
+    <style type="text/css">
+      .comment{
+        border:1px solid black;
+        border-radius: 10px;
+        overflow: auto;
+        word-wrap: break-word;
+        margin-bottom: 20px;
+        background-color: #EDFAFD;
+      }
+      .comment img{
+        display:block;
+        float:left;
+        width:100px;
+        height:100px;
+        margin-right: 50px;
+        margin-bottom: 10px;
+      }
+      .commentList{
+        background-color: #E9DCCD;
+        padding:20px;
+      }
+      .commentForm textarea{
+        width:300px;
+        height:150px;
+      }
+      .commentForm #author{
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+    </style>
+
+    <script type="text/babel" >
+    
+      console.log("HELLO");
+
+      var Comment = React.createClass({
+        render: function() {
+          return (
+              <div className="comment">
+                <div>
+                  <img className="img-resposnive img-circle" src={this.props.allInfo.image}/>
+                  <h2 className="commentAuthor">
+                    {this.props.author}
+                  </h2>
+                </div>            
+                {this.props.children}
+              </div>
+            );
+        }
+      });
+
+      var CommentList = React.createClass({
+        render: function() {
+          var commentNodes = this.props.data.map(function(comment){
+            return (
+                <Comment author={comment.author} allInfo={comment} key={comment.id}>{comment.text}</Comment>
+              );
+          });
+          return (
+              <div className="commentList">
+                    {commentNodes}
+                 </div>
+            );
+        }
+      });
+
+      var CommentForm  = React.createClass({
+        getInitialState: function() {
+            return {author: '', text: ''};
+          },
+        handleTextChange: function(e) {
+            this.setState({text: e.target.value});
+        },
+        handleSubmit: function(e) {
+            e.preventDefault();
+            var author = $("#author").text();
+            var text = this.state.text.trim();
+            if (!text || !author) {
+              return;
+            }
+            this.props.onCommentSubmit({author: author, text: text});
+            this.setState({author: '', text: ''});
+        },
+        render: function() {
+          return (
+              <form className="commentForm" onSubmit={this.handleSubmit}>
+                   Write comment as: <span id="author"> Riste Poposki </span> 
+                   
+                    <textarea type="text" placeholder="Say something..." value={this.state.text} onChange={this.handleTextChange} />
+                     
+                    <input className="btn btn-success" type="submit" value="Post" />
+                  </form>
+            );
+        }
+      });
+
+      var CommentBox = React.createClass({
+        getInitialState: function() {
+            return {data: []};
+          },
+          componentDidMount: function() {
+
+            $.ajax({
+              url: this.props.url,
+              dataType: 'json',
+              cache: false,
+              success: function(data) {
+                var AllComments=[];
+                $(data).each(function(index,item){
+                  var comment={};
+                  comment.id = item.id;
+                  comment.author = item.userFrom.fname +" "+item.userFrom.lname;
+                  comment.text = item.comment;
+                  comment.image = "http://localhost:8080/book-project/api/users/get-image/"+item.userFrom.id;
+                  //console.log(comment)
+                  AllComments.push(comment);
+                });
+                this.setState({data: AllComments});
+
+              }.bind(this),
+              error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+              }.bind(this)
+            });
+          },
+
+          handleCommentSubmit: function(comment) {
+              var data = this.state.data;
+              data.push(comment);
+              this.setState({data: data});
+          },
+        render: function () {
+          return (
+              <div>
+                <h1>Comments</h1>
+                    <CommentList data={this.state.data} />
+                    <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+                  </div>
+            );
+        }
+      });
+
+      ReactDOM.render(
+        <CommentBox url="http://localhost:8080/book-project/api/comments/of-user/1"/>,
+        document.getElementById('contentReact')
+      );
+    </script> 
+
+
+
+
+</div>
 </html>
