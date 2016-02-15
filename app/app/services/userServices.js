@@ -127,6 +127,13 @@ bookProject
 		viewUser: function(id){
 				//TO DO view USER PAGE
 			$state.go('visitUser',{"userId":id});
+		},
+		addGenres:function(callback, helper){
+	        $http.post("http://localhost:8080/book-project/api/users/edit-genres", helper )
+			.success(function (data){
+				callback(data);
+			})
+			.error(function (data){console.log("ERROR in edit-genres");})
 		}
 		
 	}

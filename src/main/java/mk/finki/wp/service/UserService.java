@@ -11,7 +11,8 @@ public interface UserService {
 	public User findUsersByUsername(String username);
 	public User findUserById(Long id);
 	public User saveOrUpdateUser(User user);
-	public User addGenre(User user,Genre genre);
+	public User addGenre(User user,Genre genres);
+	public User addGenres(User user,List<Long> genres);
 	public User createUser(String fname,String lname,String username,
 							String password,String biography,String image);
 	public User createUser(User user);

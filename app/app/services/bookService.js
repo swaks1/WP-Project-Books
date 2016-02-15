@@ -34,7 +34,6 @@ bookProject
 			 console.log("getting all genres");
 			 $http({ method: 'GET', url: 'http://localhost:8080/book-project/api/genres' }).
 	        success(function (data, status, headers, config) {
-	            console.log(data);
 	          	callback(data);
 	             
 	         }).

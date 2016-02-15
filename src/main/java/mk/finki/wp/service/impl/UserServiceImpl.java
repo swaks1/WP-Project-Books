@@ -20,6 +20,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepo;
 	
+	@Autowired
+	GenreServiceImpl genreService;
+	
 	
 	@Override
 	public List<User> findUsersByName(String fname) {
@@ -52,6 +55,17 @@ public class UserServiceImpl implements UserService {
 			user.setGenres(new ArrayList<Genre>());
 		}
 		user.addGenre(genre);
+		user=saveOrUpdateUser(user);
+		return user;
+	}
+	
+	@Override
+	public User addGenres(User user,List<Long> genres) {
+		user.setGenres(new ArrayList<Genre>());
+		for(Long g : genres){
+			user.addGenre(genreService.findById(g));
+		}
+		
 		user=saveOrUpdateUser(user);
 		return user;
 	}

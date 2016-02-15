@@ -15,7 +15,6 @@ bookProject
 
         bookService.getGenres(function(data){
             $scope.genres=data;
-            //console.log("books from ctrl");
         });
 
          $scope.ShowSelected = function() {
@@ -34,12 +33,12 @@ bookProject
 		        return ;
 		   }
 
-		  //console.log(genreArray);
 		  bookService.getBooksByGenre(function(data){
 		  		  $scope.books = data;
 		  },genreArray);
 		  
 		};
+
 
  }])
 

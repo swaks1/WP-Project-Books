@@ -164,6 +164,46 @@ bookProject
 
 }])
 
+.controller("userProfileEditGenres",[
+           '$scope','$http','$state','bookService','userProfileService', '$rootScope', 'loginService',
+    function($scope, $http, $state,bookService, userProfileService, $rootScope, loginService){
+            $rootScope.loggedIn = loginService.islogged();
+        $scope.genres=[];
+        var HC = {};
+        var user = loginService.isloggedUser();
+        HC.userId = user.id;
+
+        bookService.getGenres(function(data){
+            $scope.genres=data;
+        });
+
+        //checking on fav genres
+        var userGenres = [];
+        for(index in user.genres){
+            userGenres[index] = (user.genres[index].id);
+        }
+        
+        $scope.userGenres=userGenres; 
+                   
+         $scope.addSelected = function() {
+           var cbs = $(".cbGenres");
+           HC.genreIds=[];
+           cbs.each(function(index,item){
+                if(item.checked)
+                    HC.genreIds.push(item.id);
+           });
+
+           
+          userProfileService.addGenres(function(data){
+                  sessionStorage.setItem('user',JSON.stringify(data));
+                  $state.go("^", { obj : data});
+
+          },HC);
+
+
+        };
+}])
+
 .controller("userProfile",[
             "$scope","$state","userProfileService","loginService","$rootScope",'$stateParams',
     function($scope, $state, userProfileService,loginService,$rootScope,$stateParams){

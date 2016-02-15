@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import mk.finki.wp.model.Book;
 import mk.finki.wp.model.User;
 
 import mk.finki.wp.service.UserService;
@@ -270,7 +271,14 @@ public class UserController {
 	 }
 	 
 	 
-	 
+	 @RequestMapping(value = "/edit-genres", method = RequestMethod.POST)
+		public ResponseEntity<?> editGenres(@RequestBody helperClass HC ){
+		 			
+		 	User user = userService.addGenres(userService.findUserById(HC.getUserId()),
+		 			HC.getGenreIds());
+			return new ResponseEntity<User>(user,HttpStatus.OK);
+			
+			}
 	
 
 	//printanje na JAVA objekt vo JSON vo consola....
