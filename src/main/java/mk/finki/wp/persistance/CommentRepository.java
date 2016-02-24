@@ -10,10 +10,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import mk.finki.wp.model.Book;
 import mk.finki.wp.model.Comment;
-import mk.finki.wp.model.FavBook;
-import mk.finki.wp.model.User;
 
 @Repository
 public class CommentRepository {
