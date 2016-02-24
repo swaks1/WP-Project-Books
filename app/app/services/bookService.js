@@ -72,4 +72,33 @@ bookProject
 		}
 	}
 
+}])
+
+.factory('rateBookService',['$http', function($http){
+	return{
+		rateBook: function(callback,data){
+			$http.post('http://localhost:8080/book-project/api/rate/rate',data, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+               }).success(function(data){
+               		callback(data);
+               }).error(function(data){}); 
+		},
+
+		getRateBookState: function(callback, userId , bookId){
+			var params = "userId=" + userId + "&bookId=" + bookId;
+			$http.get('http://localhost:8080/book-project/api/rate/get-rate-state?' + params )
+			.success(function(data){
+               		callback(data);
+               }).error(function(data){}); 
+		},
+
+		getAverageRate: function(callback, bookId){
+			$http.get('http://localhost:8080/book-project/api/rate/' + bookId)
+			.success(function(data){
+               		callback(data);
+               }).error(function(data){}); 
+		},
+	}
+
 }]);

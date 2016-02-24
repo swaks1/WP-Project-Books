@@ -42,33 +42,67 @@ bookProject
 
  }])
 
-. controller("singleCtrl", ["$stateParams", "$scope", "$rootScope", "bookService","loginService","favBookService",
-	function($stateParams, $scope, $rootScope,bookService, loginService,favBookService){
+. controller("singleCtrl", 
+	["$stateParams", "$scope", "$rootScope", "bookService","loginService","favBookService","rateBookService",
+	function($stateParams, $scope, $rootScope,bookService, loginService,favBookService,rateBookService){
 		$rootScope.loggedIn = loginService.islogged();
 		var bookId = $stateParams.itemId;
 		var userId = loginService.isloggedUser().id;
 		$scope.contentLoaded = false;
 
-
+		// load book
 		bookService.getBookById(function (data){
 			$scope.book = data;
 			$scope.contentLoaded = true;
-			console.log($scope.url);
 		},bookId);
 
-		favBookService.getFavBookState(function (data){
-			$scope.isliked = data;
-			console.log($scope.isliked);
-		},userId, bookId);
+		
+		if(userId != null){ // if logged in
+			favBookService.getFavBookState(function (data){
+				$scope.isliked = data; //show like button
+			},userId, bookId);
 
-		$scope.toggle = function(){
-			var fd = new FormData();
+			rateBookService.getRateBookState(function (data){
+				for(i = 1; i <= data; i++){
+					$("#" + i).addClass("starRate"); // color yellow....
+				}
+			},userId,bookId);
+
+			$scope.toggle = function(){
+				var fd = new FormData(); 
 	            fd.append('userId', userId);
 	            fd.append('bookId',bookId);
-			favBookService.toggleFavBook(function (data){
-				$scope.isliked = data;
-				console.log(data);
-			}, fd);
+				favBookService.toggleFavBook(function (data){
+					$scope.isliked = data;
+				}, fd);
+			}
+
+			$scope.rate = function(stars){
+				var fd = new FormData(); 
+	            fd.append('userId', userId);
+	            fd.append('bookId',bookId);
+	            fd.append('stars',stars);
+				rateBookService.rateBook(function (data){
+						console.log(data);
+					for(i = 1; i <= data; i++){
+						$("#" + i).addClass("starRate"); // color yellow....
+					}
+				},fd);
+			}
+
 		}
+		else{ 
+			$(".like").hide(); // hide like button
+			$(".rating").hide(); // hide stars
+		}
+
+
+
+		//rating info
+		rateBookService.getAverageRate(function (data){
+			$scope.rating = data;
+		},bookId);
+
+
 
 }]);

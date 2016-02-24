@@ -14,16 +14,20 @@
 
 								<div class="clearfix"></div>
 								<p class="ratingview c-rating">Avg Readers' Rating:</p>
-								<div class="rating c-rating">
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-									<span>☆</span>
-								</div> 	
-								<p class="ratingview c-rating">								
-								&nbsp; 3.3/5</p>
+								<img src="/views/images/star.png" class="star">
+								
+								<p class="ratingview c-rating inline" style="font-size: 2em;">
+								&nbsp; {{rating.averageRate}}</p>/5
+								<p class="inline" style="font-size: 0.7em;"> from <span>{{rating.totalUserRatings}}</span> users</p>
 								<div class="clearfix"></div>
+								<div class="rating c-rating">
+									<span ng-click="rate(5);" id="5">☆</span>
+									<span ng-click="rate(4);" id="4">☆</span>
+									<span ng-click="rate(3);" id="3">☆</span>
+									<span ng-click="rate(2);" id="2">☆</span>
+									<span ng-click="rate(1);" id="1">☆</span>
+								</div> 	
+
 								<div class="yrw">
 									<div class="dropdown-button">           			
 										<select class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>

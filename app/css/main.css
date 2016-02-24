@@ -5,7 +5,13 @@ listingDescriptionp.ratingview {
 	float: left;
 	margin:10px 0px;
 }
-.rating {
+img.star{
+	height: 40px;
+}
+.inline{
+	display: inline-block;
+}
+.rating  {
 		  direction: rtl;
 		  text-align: center;
 		    float: left;
@@ -26,7 +32,16 @@ listingDescriptionp.ratingview {
 		   position: absolute;
 		   left: 0;
 		   color: gold;
-		}    
+		}
+.starRate:before {
+	color: transparent;
+	content: "\2605";
+    position: absolute;
+    left: 0;
+    color: gold;
+    
+}
+
 .yrw {
 	margin: 2em 0;
 }
