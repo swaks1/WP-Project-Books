@@ -99,12 +99,23 @@ bookProject
 			})
 			.error(function (data){console.log("ERROR in fav-books");})
 		},
-		updateProfileInfo:function(callback, user){
-			$http.post("http://localhost:8080/book-project/api/users/update", user )
-			.success(function (data){
+		updateProfileInfo:function(callback, data){
+			// $http.post("http://localhost:8080/book-project/api/users/update", user )
+			// .success(function (data){
+			// 	callback(data);
+			// })
+			// .error(function (data){console.log("ERROR in fav-books");})
+			var $promise = $http.post('http://localhost:8080/book-project/api/users/update',data, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                }); //send data 
+			$promise
+			.success(function(data){
 				callback(data);
-			})
-			.error(function (data){console.log("ERROR in fav-books");})
+								   
+			}).error(function(data, status, headers, config) {
+				console.log("error in edit info")
+            });
 		},
 		getUsers: function(callback){
 			$http.get("http://localhost:8080/book-project/api/users")

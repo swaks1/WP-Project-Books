@@ -91,9 +91,52 @@ public class UserController {
 		}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ResponseEntity<User> updateUser(@RequestBody User user){
+	public ResponseEntity<User> updateUser( 
+			@RequestParam(required = false) Long id,
+			@RequestParam(required = false) String fname,
+			 @RequestParam(required = false) String lname,
+			 @RequestParam(required = false) String biography,
+			 @RequestParam(required = false) MultipartFile file,
+			 HttpServletRequest request){
 		
-		User updatedUser = userService.updateUser(user);
+		User updatedUser = userService.updateUser(id,fname,lname,biography);
+		
+		if (file != null && !file.isEmpty()) {
+			
+            try {
+                // Creating the PATH to directory to store file
+               String uploadsDir = "/uploads/";
+               String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
+              
+               //Creating the DIRECTORY from PATH and checking if it exists
+               File directory = new File(realPathtoUploads);
+               if(! directory.exists())
+               {
+            	   directory.mkdir();
+               }
+               
+               //extractig the extension and adding user-id as name;
+               String originalName = file.getOriginalFilename();
+               String extension = originalName.substring(originalName.lastIndexOf("."), 
+               											originalName.length()); 	
+               String name = "user-"+updatedUser.getId()+extension;
+               
+               //creating full path of the file we have to save
+               String filePath = realPathtoUploads + name;
+                            
+               //trasnfering the file to the destination (saving)
+               File dest = new File(filePath);	
+               file.transferTo(dest);
+               
+               updatedUser.setImage(name);
+               updatedUser = userService.saveOrUpdateUser(updatedUser);
+               
+              
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
 		return new ResponseEntity<User>(updatedUser,HttpStatus.OK);
 		
 		}

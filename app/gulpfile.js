@@ -69,7 +69,14 @@ var JS_LIB = [
     'bower_components/angular-xeditable/dist/js/xeditable.js',
     'bower_components/react/react.js',
     'bower_components/react/react-dom.js',
-    'bower_components/ngReact/ngReact.min.js'
+    'bower_components/ngReact/ngReact.min.js',
+	'bower_components/angular-animate/angular-animate.js',
+	'bower_components/angular-touch/angular-touch.js',
+	'bower_components/angular-bootstrap/ui-bootstrap.min.js',
+	'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
+	
+      
+     
 ];
 
 var JS_APP = [

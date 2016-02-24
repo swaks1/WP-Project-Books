@@ -9,7 +9,10 @@ var bookProject = angular.module('book-project', [
   'ui.select',
   'ngQuickDate',
   'angularUtils.directives.dirDisqus',
-  'react'])
+  'react',
+  'ngAnimate',
+  "ngTouch",
+  "ui.bootstrap"])
   .config(['$stateProvider', '$urlRouterProvider','$locationProvider',
          function($stateProvider, $urlRouterProvider,$locationProvider){
        $urlRouterProvider.otherwise("/");

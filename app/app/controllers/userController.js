@@ -7,9 +7,11 @@ bookProject
     console.log("HEADER CTRL");
     //za AUTO COMPELTE
     $rootScope.allUsers = [];
+
     userProfileService.getUsers(function(data){
         var people = data;
-       
+        $rootScope.allUsers = [];
+        
         $(people).each(function(index,item){
             $rootScope.allUsers.push({
                 id:item.id,
@@ -17,8 +19,10 @@ bookProject
                 date:item.dateCreated
             })
         });
-        
-        var autocompleteUsers = $rootScope.allUsers; 
+
+
+          var autocompleteUsers = $rootScope.allUsers; 
+         
               $( "#autocomplete").autocomplete({
                         minLength: 0,
                         source: autocompleteUsers,
@@ -41,6 +45,8 @@ bookProject
                           .append(icon).append( "<a>" + item.label + "<br>" + "" + "</a>" )
                           .appendTo( ul );
                       };
+        
+      
 
     });
 
@@ -61,6 +67,24 @@ bookProject
         $state.go('searchUsers');
         
     };  
+
+
+
+    $scope.slides = [
+    {
+      image: 'http://lorempixel.com/400/200/'
+    },
+    {
+      image: 'http://lorempixel.com/400/200/food'
+    },
+    {
+      image: 'http://lorempixel.com/400/200/sports'
+    },
+    {
+      image: 'http://lorempixel.com/400/200/people'
+    }
+  ];
+
    
 })
 
@@ -149,12 +173,26 @@ bookProject
 
         $scope.save= function(){
             if(user){
-                user.lname = $scope.user.lname;
-                user.fname = $scope.user.fname;
-                user.biography = $scope.user.biography;
+                 var fd = new FormData();
+               
+                fd.append('id',$scope.user.id);
+                fd.append('fname',$scope.user.fname);
+                fd.append('lname',$scope.user.lname);
+                fd.append('biography',$scope.user.biography);  
+                
+                var file = $scope.myFile;
+                if(file != null)
+                {
+                    var fileType = file.type;
+                    if( fileType.indexOf("image")!= -1 )
+                       fd.append('file', file);
+                    else 
+                        console.log("Toa ne e slika hhihihi ");
+                }
+               
                 userProfileService.updateProfileInfo(function(data){
                     sessionStorage.setItem("user",JSON.stringify(data));
-                }, user);
+                }, fd);
                 $scope.$state = $state;
                 $state.go("^", { obj : user});
             }

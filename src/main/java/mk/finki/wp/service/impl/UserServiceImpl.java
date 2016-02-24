@@ -115,6 +115,17 @@ public class UserServiceImpl implements UserService {
 		user.setDateCreated(userOld.getDateCreated());
 		return saveOrUpdateUser(user);
 	}
+	
+	public User updateUser(Long id, String fname, String lname,String bio) {
+		User userOld = userRepo.findById(User.class, id);
+		userOld.setFname(fname);
+		userOld.setBiography(bio);
+		userOld.setLname(lname);
+		
+		
+		return saveOrUpdateUser(userOld);
+	}
+	
 
 	@Override
 	public String findImageById(Long id) {
