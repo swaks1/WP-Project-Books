@@ -20,7 +20,7 @@ img.star{
 		.rating > span {
 		  display: inline-block;
 		  position: relative;
-		  width: 1.1em;
+		  /*width: 1.1em;*/
 		}
 		.rating > span:hover,
 		.rating > span:hover ~ span {
@@ -38,7 +38,7 @@ img.star{
 	content: "\2605";
     position: absolute;
     left: 0;
-    color: gold;
+    color: black;
     
 }
 

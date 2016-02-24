@@ -106,14 +106,15 @@ bookProject
  }])
  
  .controller("logoutCtrl",[
-            '$scope', '$http', '$state',"loginService",
-    function($scope, $http, $state, loginService){
+            '$scope', '$http', '$state',"loginService","$rootScope",
+    function($scope, $http, $state, loginService,$rootScope){
         loginService.logout();
+        $rootScope.loggedIn = loginService.islogged();
  }])
 
  .controller("registerCtrl",[
-            '$scope','$http','$state','loginService','$rootScope',
-    function($scope,$http, $state,loginService,$rootScope){
+            '$scope','$http','$state','loginService',
+    function($scope,$http, $state,loginService){
 
         var usernames = [];
         loginService.getUsernames(function(data){

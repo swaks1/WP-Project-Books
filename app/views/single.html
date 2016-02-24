@@ -17,35 +17,18 @@
 								<img src="/views/images/star.png" class="star">
 								
 								<p class="ratingview c-rating inline" style="font-size: 2em;">
-								&nbsp; {{rating.averageRate}}</p>/5
-								<p class="inline" style="font-size: 0.7em;"> from <span>{{rating.totalUserRatings}}</span> users</p>
+								&nbsp; {{rating.averageRate | number:1}}</p>/5
+								<p class="inline" style="font-size: 0.7em;">  from <span>{{rating.totalUserRatings}}</span> users</p>
 								<div class="clearfix"></div>
-								<div class="rating c-rating">
-									<span ng-click="rate(5);" id="5">☆</span>
-									<span ng-click="rate(4);" id="4">☆</span>
-									<span ng-click="rate(3);" id="3">☆</span>
-									<span ng-click="rate(2);" id="2">☆</span>
-									<span ng-click="rate(1);" id="1">☆</span>
-								</div> 	
 
-								<div class="yrw">
-									<div class="dropdown-button">           			
-										<select class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
-										<option value="0">Your rating</option>	
-										<option value="1">1.Poor</option>
-										<option value="2">1.5(Below average)</option>
-										<option value="3">2.Average</option>
-										<option value="4">2.5(Above average)</option>
-										<option value="5">3.Readable</option>
-										<option value="6">3.5(Good)</option>
-										<option value="7">4.5(Very good)</option>
-										<option value="8">5.Outstanding</option>
-									  </select>
-									</div> 
-                                    &nbsp;&nbsp;
-									<button class="btn btn-success"  id="rate">Rate it</button>
-									<div class="clearfix"></div>
-								</div>
+								<div class="rating c-rating">
+									<p class="ratingview c-rating">Rate it</p>
+									<span ng-click="rate(5);" uib-tooltip="Rated:5" tooltip-trigger="outsideClick" id="5">☆</span>
+									<span ng-click="rate(4);" uib-tooltip="Rated:4" tooltip-trigger="outsideClick" id="4">☆</span>
+									<span ng-click="rate(3);" uib-tooltip="Rated:3" tooltip-trigger="outsideClick" id="3">☆</span>
+									<span ng-click="rate(2);" uib-tooltip="Rated:2" tooltip-trigger="outsideClick" id="2">☆</span>
+									<span ng-click="rate(1);" uib-tooltip="Rated:1" tooltip-trigger="outsideClick" id="1">☆</span>
+								</div> 	
 								
 							</div>
 							<div class="clearfix"></div>

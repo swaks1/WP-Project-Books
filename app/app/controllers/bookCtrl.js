@@ -83,9 +83,11 @@ bookProject
 	            fd.append('bookId',bookId);
 	            fd.append('stars',stars);
 				rateBookService.rateBook(function (data){
-						console.log(data);
+					for(i = 1; i <= 5; i++){ // if it has it and recives lower rate
+						$("#" + i).removeClass("starRate"); // remove color black....
+					}
 					for(i = 1; i <= data; i++){
-						$("#" + i).addClass("starRate"); // color yellow....
+						$("#" + i).addClass("starRate"); // color black....
 					}
 				},fd);
 			}
