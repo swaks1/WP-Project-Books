@@ -193,6 +193,7 @@ bookProject
                
                 userProfileService.updateProfileInfo(function(data){
                     sessionStorage.setItem("user",JSON.stringify(data));
+                    location.assign("/index.html?#/user");
                 }, fd);
                 $scope.$state = $state;
                 $state.go("^", { obj : user});
@@ -248,6 +249,7 @@ bookProject
     function($scope, $state, userProfileService,loginService,$rootScope,$stateParams){
         var user = loginService.isloggedUser();
         $rootScope.loggedIn = loginService.islogged();
+
         if($stateParams.obj)
         {
             user = $stateParams.obj;
