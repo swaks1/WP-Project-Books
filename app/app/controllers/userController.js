@@ -1,5 +1,5 @@
 bookProject
-.controller('headerCtrl', function ($scope,$rootScope,$state, loginService,userProfileService) { 
+.controller('headerCtrl', function ($scope,$rootScope,$state, loginService,userProfileService,bookService,authorService) { 
     $rootScope.loggedIn = loginService.islogged();
     $rootScope.loggedUser = loginService.isloggedUser();
     $( "#autocomplete").val("");
@@ -67,6 +67,22 @@ bookProject
         $state.go('searchUsers');
         
     };  
+
+    if(!$scope.caraouselBooks){
+         $scope.caraouselBooks=[];
+
+        bookService.getBooks(function(data){
+            $scope.caraouselBooks = data;
+            $scope.book = data[0];
+            $scope.author = [];
+                authorService.getAuthorWithBooks(function(data){
+                    $scope.author = data;
+                },$scope.book.author.id)
+            $scope.author.books = 
+            console.log(data);
+    });
+    }
+   
 
 
 

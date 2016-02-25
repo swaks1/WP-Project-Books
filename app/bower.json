@@ -8,7 +8,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.5",
+    "bootstrap": "*",
     "angular": "~1.4.0",
     "angular-ui-router": "~0.2.15",
     "angular-resource": "~1.4.1",
@@ -24,6 +24,7 @@
     "angular-strap": "~2.2.4",
     "ngQuickDate": "~1.3.3",
     "react": ">=0.14.0",
+    "ngReact":"*",
     "angular-animate":"*",
     "angular-touch":"*",
     "angular-bootstrap":"*"

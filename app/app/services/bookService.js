@@ -6,7 +6,7 @@ bookProject
 			 console.log("getting Boooks");
 			 $http({ method: 'GET', url: 'http://localhost:8080/book-project/api/books' }).
 	        success(function (data, status, headers, config) {
-	            console.log(data);
+	            //console.log(data);
 	          	callback(data);
 	             
 	         }).

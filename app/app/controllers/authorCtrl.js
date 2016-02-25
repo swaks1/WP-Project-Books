@@ -13,4 +13,15 @@ bookProject
 
       }
 
-}])
+}]).filter('limitWords', function() {
+    return function(input,num) {
+
+        if(input){
+            var str = input.substring(0,num);
+            str+="...";
+            return str;
+        }
+        return "";
+      
+    };
+});

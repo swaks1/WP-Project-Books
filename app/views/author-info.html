@@ -20,7 +20,7 @@
     	<div class="authorBookHolder" ng-repeat="book in author.books">
 			<div class="authorBookImage">
 				<a ui-sref="single({itemId:book.id})">
-					<img src="http://localhost:8080/book-project/api/books/get-image/{{book.id}}" alt="">
+					<img ng-src="http://localhost:8080/book-project/api/books/get-image/{{book.id}}" alt="">
 				</a>
 				</div>
 

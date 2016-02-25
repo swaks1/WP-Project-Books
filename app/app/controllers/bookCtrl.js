@@ -89,6 +89,10 @@ bookProject
 					for(i = 1; i <= data; i++){
 						$("#" + i).addClass("starRate"); // color black....
 					}
+
+					rateBookService.getAverageRate(function (data){
+							$scope.rating = data;
+						},bookId);
 				},fd);
 			}
 
