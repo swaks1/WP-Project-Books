@@ -209,7 +209,8 @@ bookProject
                
                 userProfileService.updateProfileInfo(function(data){
                     sessionStorage.setItem("user",JSON.stringify(data));
-                    location.assign("/index.html?#/user");
+                    location.reload();
+
                 }, fd);
                 $scope.$state = $state;
                 $state.go("^", { obj : user});

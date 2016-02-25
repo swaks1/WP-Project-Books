@@ -71,6 +71,9 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ng-hide="loggedIn" ui-sref="register" id="registerLink">Register</a></li>
                     <li><a ng-hide="loggedIn" ui-sref="login" id="loginLink">Log in</a></li>
+                    <li><a ng-show="loggedIn" ui-sref="user" id="profileLink">
+                      <img ng-src="http://localhost:8080/book-project/api/users/get-image/{{loggedUser.id}}" 
+                     class="img img-responsive img-circle" style="cursor:pointer;height:20px;width:30px; margin-right:-20px" alt="" /></a></li>
                     <li><a ng-show="loggedIn" ui-sref="user" id="profileLink">My profile</a></li>
                     <li><a ng-show="loggedIn" ui-sref="logout" id="logOutLink">Log out</a></li>
                 </ul>
@@ -147,7 +150,7 @@
 
 
 
-<script src="dest/src.js?rev=17b1e8bbaa69eafabd7d3b930cb0b824"></script>
+<script src="dest/src.js?rev=bba0d46cbd46b6cfab84b9ba5b6b4950"></script>
 
 
 
@@ -155,7 +158,7 @@
 
 <!-- All html templates -->
 
- <script src="dest/templates.js?rev=ae3eb633e0e891be147a581e2ff46899"></script>
+ <script src="dest/templates.js?rev=e04ab255e9908b91a86369075b36e39c"></script>
 
 
 
