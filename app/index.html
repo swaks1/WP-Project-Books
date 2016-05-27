@@ -16,7 +16,7 @@
   <!-- Concatenated CSS -->
   <link href="dest/lib.css?rev=ce521111498417454cb372b05cbd5f4d" rel="stylesheet">
 
-  <link href="dest/app.css?rev=5378a23ed1c5789510b8b18e40382f83" rel="stylesheet">
+  <link href="dest/app.css?rev=20061eb1e4fb826ccd72870f7f263a71" rel="stylesheet">
   
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 
@@ -68,6 +68,22 @@
                     </div>
                     </form>
                 </div>
+
+                <div class="col-sm-2 col-md-2">
+                   <form class="navbar-form" role="search">
+                      <input
+                      onClick="this.select()"
+                      type="text" 
+                      ng-model="selected"
+                      placeholder="SearchBooks"
+                      typeahead-template-url="views/searchBookTemplate.html"
+                      uib-typeahead="book as book.title for book in caraouselBooks | filter:{title:$viewValue} | limitTo:8" 
+                      class="form-control"
+                      typeahead-on-select="onSelect($item, $model, $label)"/>
+                    </form>
+                     
+                </div>
+
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ng-hide="loggedIn" ui-sref="register" id="registerLink">Register</a></li>
                     <li><a ng-hide="loggedIn" ui-sref="login" id="loginLink">Log in</a></li>
@@ -144,14 +160,14 @@
 
 
 <!-- Concatenated libraries -->
-<script src="dest/lib.js?rev=59706fdbc43fd0d021c582075ece9d29"></script>
+<script src="dest/lib.js?rev=71f2ad3a17a1d5e3f05609aa5cf6dba8"></script>
 <!-- Concatenated application -->
 
 
 
 
 
-<script src="dest/src.js?rev=17b1e8bbaa69eafabd7d3b930cb0b824"></script>
+<script src="dest/src.js?rev=9eb37f962ff749577caad05b035e6507"></script>
 
 
 
@@ -159,7 +175,7 @@
 
 <!-- All html templates -->
 
- <script src="dest/templates.js?rev=ae3eb633e0e891be147a581e2ff46899"></script>
+ <script src="dest/templates.js?rev=1555e87c0a8bbbfb385af3bc102d2146"></script>
 
 
 

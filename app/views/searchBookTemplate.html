@@ -1,0 +1,23 @@
+
+ 	<div class="media" style="width:300px;">
+	  <div class="media-left">
+	    <a href="#" ui-sref="single({itemId:match.model.id})">
+	      <img class="media-object" ng-src="http://localhost:8080/book-project/api/books/get-image/{{match.model.id}}" 
+	       style="width:50px; height:50px;" >
+	    </a>
+	  </div>
+	  <div class="media-body">
+	    <h4 class="media-heading"> </h4>
+	    	<a href="#" ui-sref="single({itemId:match.model.id})" style="color:black; text-decoration:none;">
+	    		<span ng-bind-html="match.model.title | uibTypeaheadHighlight:query"></span>
+	    	</a>
+	    	<br>
+	    	<small class="text-muted">By: {{match.model.author.name}} {{match.model.author.surname}} </small>
+	  </div>
+	</div>
+     
+  <!--      <a href="#" ui-sref="single({itemId:match.model.id})">
+ 		 <img ng-src="http://localhost:8080/book-project/api/books/get-image/{{match.model.id}}" class="img img responsive" style="width:50px; height:50px;" >
+      <span ng-bind-html="match.model.title | uibTypeaheadHighlight:query"></span> 
+      <span class="">By: {{match.model.author.name}} {{match.model.author.surname}} </span>
+ 	 </a> -->

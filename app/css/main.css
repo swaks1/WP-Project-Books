@@ -388,3 +388,10 @@ html, body {
     overflow: hidden;
 
     }
+
+
+    .dropdown-menu li {
+      padding:4px 4px;
+      border-bottom: 1px solid grey;
+      cursor: pointer;
+    }

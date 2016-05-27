@@ -82,7 +82,12 @@ bookProject
             console.log(data);
     });
     }
-   
+    
+    //funckija on selekt za Searchot za Books 
+
+    $scope.onSelect = function($item, $model, $label){
+        $state.go('single',{"itemId":$item.id});
+    };
 
 
 
