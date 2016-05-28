@@ -97,7 +97,7 @@ bookProject
 			$http.get('http://localhost:8080/book-project/api/rate/' + bookId)
 			.success(function(data){
                		callback(data);
-               }).error(function(data){}); 
+               }).error(function(data){console.log(bookId)}); 
 		},
 	}
 

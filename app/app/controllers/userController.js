@@ -1,5 +1,6 @@
 bookProject
-.controller('headerCtrl', function ($scope,$rootScope,$state, loginService,userProfileService,bookService,authorService) { 
+.controller('headerCtrl', function ($scope,$rootScope,$state, loginService,userProfileService,bookService,authorService,rateBookService)
+ { 
     $rootScope.loggedIn = loginService.islogged();
     $rootScope.loggedUser = loginService.isloggedUser();
     $( "#autocomplete").val("");
@@ -73,18 +74,24 @@ bookProject
 
         bookService.getBooks(function(data){
             $scope.caraouselBooks = data;
+
+            //for featured book
             $scope.book = data[0];
+            //rating info
+            rateBookService.getAverageRate(function (data){
+                $scope.rating = data;
+            }, $scope.book.id);
+
+            //featured autor
             $scope.author = [];
                 authorService.getAuthorWithBooks(function(data){
                     $scope.author = data;
                 },$scope.book.author.id)
-            $scope.author.books = 
             console.log(data);
     });
     }
     
     //funckija on selekt za Searchot za Books 
-
     $scope.onSelect = function($item, $model, $label){
         $state.go('single',{"itemId":$item.id});
     };

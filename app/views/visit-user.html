@@ -45,27 +45,27 @@ var Comment = React.createClass({
         render: function() {
           var obj = this;
           return (
-              React.createElement('div', {className: 'comment',key:this.props.comment.id},
-                React.createElement('div', {},
+              React.createElement('div', {className: 'media comment',key:this.props.comment.id},
+                React.createElement('a', {},
                   React.createElement('img',{
-                                        className:'img-resposnive img-circle',
+                                        className:'img-circle img-responsive media-object',
                                         src: this.props.comment.image,
                                         onClick: function(){
                                             console.log("REDIRECT")
                                             location.assign("/index.html?#/visit-user/"+obj.props.comment.fromID);
                                           }
                                       } ),
-                  React.createElement('h2',{
-                                          className:'commentAuthor',
+                  React.createElement('h4',{
+                                          className:'media-heading',
                                           onClick: function(){
                                             console.log("REDIRECT")
                                             location.assign("/index.html?#/visit-user/"+obj.props.comment.fromID);
                                           }
-                                        },this.props.comment.author),
-                  React.createElement('h5',{},this.props.comment.date),
+                                        },this.props.comment.author + " ",
+                  React.createElement('small',{},this.props.comment.date) ),
                   this.props.deleteBtn ?
                   React.createElement('button',{
-                                              className:'btn btn-sm btn-danger',
+                                              className:'btn btn-sm btn-danger pull-right',
                                               onClick : function(){
                                                           $.ajax({
                                                                 url: "http://localhost:8080/book-project/api/comments/delete-comment/"+obj.props.comment.id,
@@ -150,20 +150,26 @@ var CommentForm  = React.createClass({
         render: function() {
           return (
 
-               React.createElement('form',{className:'commentForm', onSubmit:this.handleSubmit},
-                  React.createElement('div',{},"Write Comment as:",
+              React.createElement('div', {className:'well'},
+               React.createElement('form',{ onSubmit:this.handleSubmit},
+                  React.createElement('h4',{},"Write Comment as: ",
                       React.createElement('span',{id:'author'},this.props.currentUser.fname+" "+this.props.currentUser.lname) 
                   ),
-                  React.createElement('textarea',{ 
+                  React.createElement('div',{className:'form-group'},
+                      React.createElement('textarea',{ 
+                          className:'form-control',
                           placeholder:'Say something...',
+                          rows:"3",
                           type:"text",
                           value:this.state.text, 
                           onChange:this.handleTextChange
-                          }),
-                  React.createElement('button',{className:'btn btn-success addComment',type:"submit"},"Add Comment")
+                          })
+                  ),
+                  
+                  React.createElement('button',{className:'btn btn-success ',type:"submit"},"Add Comment")
 
                 )
-             
+             )
             );
         }
       });
