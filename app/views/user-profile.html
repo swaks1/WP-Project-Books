@@ -5,7 +5,7 @@
     <center>
     <img  id="profilepic"  ng-src="http://localhost:8080/book-project/api/users/get-image/{{userId}}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
     <h3 class="media-heading" ng-model="user">{{user}}&nbsp;<small><a ui-sref="user.edit">(Edit profile)</a></small></h3>
-    <span ui-sref="user.editGenres"><strong>Favorite genres (click to edit) : </strong></span>
+    <span ui-sref="user.editGenres" class="EditGenres"><strong>Favorite genres (click to edit) : </strong></span>
         <span class="label label-info"  ng-repeat="g in genres" style="margin-right: 7px;">{{g.genreName}}</span>  
         <div ui-view class="container slide" >    
     </center>

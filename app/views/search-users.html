@@ -1,10 +1,42 @@
-<div class="modal-body">
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 class="page-header">Search people on this network !</h2>
+		</div>
+	</div>
+
+   <div class="row">
+     <div class="col-sm-6"> 
+          <div class="input-group">
+              <input type="text" class="form-control" placeholder="People"   id="autocomplete" name="q">
+              <div class="input-group-btn">
+                  <button class="btn btn-default " ng-click="searchUser()"><i class="glyphicon glyphicon-search"></i></button>
+              </div>
+          </div>
+     </div>
+
+	   <div class="col-sm-6"> 
+	     <p>It is more fun when you are with friends! Explore your friends on this network. Find what are their favourite books
+	     	and comment on their readings !</p>
+	  </div>
+   </div>
+
    
-   
-        <div class="searchResult"  ng-repeat="user in matchedUsers" ui-sref="visitUser({ userId: {{user.id}} })">
-            <img   ng-src="http://localhost:8080/book-project/api/users/get-image/{{user.id}}">
-            <h1> {{user.label}} </h1>
-            <div class="clearfix"></div>
-        </div>
+
+   <div class="row">
+		<div class="col-md-12">
+			<h2 class="page-header"> Your search results:</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="searchResult"  ng-repeat="user in matchedUsers" ui-sref="visitUser({ userId: {{user.id}} })">
+		        <img   ng-src="http://localhost:8080/book-project/api/users/get-image/{{user.id}}">
+		        <h1> {{user.label}} </h1>
+		        <div class="clearfix"></div>
+		    </div>
+		</div>
+	</div>
   
 </div>

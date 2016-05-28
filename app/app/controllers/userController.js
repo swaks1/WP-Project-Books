@@ -50,7 +50,8 @@ bookProject
       
 
     });
-
+    
+   
     // za klik na kopceto SEARCH
   $rootScope.searchUser = function(){
         var text = $("#autocomplete").val();

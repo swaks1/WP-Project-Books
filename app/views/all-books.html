@@ -11,7 +11,7 @@
 </span>
 
 
-<button class="btn btn-default" ng-click="ShowSelected()">SHOW IT</button>
+<button class="btn btn-default" ng-click="ShowSelected()">Filter</button>
 
 </div>
 <div class="col-md-10">
@@ -44,7 +44,7 @@
           <a ui-sref="single({itemId:book.id})"><h1> {{book.title}}</h1></a>
        </div>
        <div class="bContainerContentGenres">
-          <a ng-repeat="genre in book.genres" href="">{{genre.genreName}}</a> <span>Genres:</span>
+          <a ng-repeat="genre in book.genres" href="">{{genre.genreName}}</a> <span style="font-weight:bold">Genres:</span>
        </div>
 
        <div class="bContainerContentDesc">

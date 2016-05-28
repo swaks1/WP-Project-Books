@@ -1,8 +1,8 @@
 <br>
-<span ng-repeat="genre in genres">
+<span ng-repeat="genre in genres" style="margin-right:10px;">
                 <input type="checkbox" ng-checked="userGenres.indexOf(genre.id) != -1" class="cbGenres" value="{{genre.genreName}}" id="{{genre.id}}">
                 {{genre.genreName}}
 </span>
             
 
-<button ng-click="addSelected()" class="btn btn-default">Save changes</button>
+<button ng-click="addSelected()" class="btn btn-success">Save changes</button>

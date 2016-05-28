@@ -16,7 +16,7 @@
   <!-- Concatenated CSS -->
   <link href="dest/lib.css?rev=ce521111498417454cb372b05cbd5f4d" rel="stylesheet">
 
-  <link href="dest/app.css?rev=7fd4461750b5a72d1bc389f4a806c4d9" rel="stylesheet">
+  <link href="dest/app.css?rev=2bf57850cc87866e989e11ea686acf90" rel="stylesheet">
   
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
@@ -47,49 +47,75 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ui-sref="home">Application name</a>
+                <a class="navbar-brand" ui-sref="home">Book App</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a ui-sref="home">Home</a></li>
-                    <li><a ui-sref="user">UserProfile</a></li>
+                   <!--  <li><a ui-sref="user">UserProfile</a></li> -->
                      <li><a ui-sref="allBooks">Books</a></li>
-                    <li><a ui-sref="visitUser({userId:1})" >VisitUser</a></li>
+                    <li><a ui-sref="searchUsers">People</a></li>
+                     
+                    <!-- <li><a ui-sref="visitUser({userId:1})" >VisitUser</a></li> -->
                 </ul>
-                <div class="col-sm-3 col-md-3">
-                    <form class="navbar-form" role="search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search People"   id="autocomplete" name="q">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default " ng-click="searchUser()"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
-                    </div>
-                    </form>
-                </div>
 
-                <div class="col-sm-2 col-md-2">
+
+
+                <div class="col-md-3 col-md-offset-1 bookDropdown">
                    <form class="navbar-form" role="search">
-                      <input
-                      onClick="this.select()"
-                      type="text" 
-                      ng-model="selected"
-                      placeholder="SearchBooks"
-                      typeahead-template-url="views/searchBookTemplate.html"
-                      uib-typeahead="book as book.title for book in caraouselBooks | filter:{title:$viewValue} | limitTo:8" 
-                      class="form-control"
-                      typeahead-on-select="onSelect($item, $model, $label)"/>
+                        <div class="input-group">
+                             <input
+                              onClick="this.select()"
+                              type="text" 
+                              ng-model="selected"
+                              placeholder="Search Books !"
+                              typeahead-template-url="views/searchBookTemplate.html"
+                              uib-typeahead="book as book.title for book in caraouselBooks | filter:{title:$viewValue} | limitTo:8" 
+                              class="form-control"
+                              typeahead-on-select="onSelect($item, $model, $label)"/>
+                              <div class="input-group-btn">
+                                  <a class="btn btn-default" ui-sref="allBooks" >
+                                    <i class="glyphicon glyphicon-search"></i>
+                                  </a>
+                              </div>
+                        </div>
                     </form>
                      
                 </div>
 
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ng-hide="loggedIn" ui-sref="register" id="registerLink">Register</a></li>
+
                     <li><a ng-hide="loggedIn" ui-sref="login" id="loginLink">Log in</a></li>
-                    <li><a ng-show="loggedIn" ui-sref="user" id="profileLink">
+
+                    <li>
+                      <a ng-show="loggedIn" ui-sref="user" id="profileLink">
                       <img ng-src="http://localhost:8080/book-project/api/users/get-image/{{loggedUser.id}}" 
-                     class="img img-responsive img-circle" style="cursor:pointer;height:20px;width:30px; margin-right:-20px" alt="" /></a></li>
-                    <li><a ng-show="loggedIn" ui-sref="user" id="profileLink">My profile</a></li>
-                    <li><a ng-show="loggedIn" ui-sref="logout" id="logOutLink">Log out</a></li>
+                     class="img img-responsive img-circle" style="cursor:pointer;height:20px;width:30px; margin-right:-20px" alt="" /></a>
+                   </li>
+
+                  <!--   <li><a ng-show="loggedIn" ui-sref="user" id="profileLink">Welcome, {{loggedUser.fname}}</a></li> -->
+
+
+                  <li class="" ng-show="loggedIn">
+                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    Welcome, {{loggedUser.fname}} <span class="caret"></span>
+                    </a>
+                     <ul class="dropdown-menu">
+                          <li>
+                            <a ui-sref="user" id="profileLink" class="profileDropDown">  <i class="fa fa-user"></i> My Profile</a>
+                          </li>
+
+                          <li>
+                            <a ui-sref="user.edit" class="profileDropDown"><i class="fa fa-edit"></i>  Edit profile</a>
+                          </li>
+
+                          <li role="separator" class="divider"></li>
+                          <li>
+                            <a ui-sref="logout" id="logOutLink" class="profileDropDown"><i class="fa fa-power-off"></i> Log out</a>
+                          </li>
+                        </ul>   
+                  </li>    
                 </ul>
 
             </div>
@@ -158,14 +184,14 @@
 
 
 <!-- Concatenated libraries -->
-<script src="dest/lib.js?rev=59706fdbc43fd0d021c582075ece9d29"></script>
+<script src="dest/lib.js?rev=71f2ad3a17a1d5e3f05609aa5cf6dba8"></script>
 <!-- Concatenated application -->
 
 
 
 
 
-<script src="dest/src.js?rev=8d8ad26fee1b9d6046b9a3c33706daa7"></script>
+<script src="dest/src.js?rev=a6c3e4763e8429948e79bcab4992a58f"></script>
 
 
 
@@ -173,7 +199,7 @@
 
 <!-- All html templates -->
 
- <script src="dest/templates.js?rev=67e1906683428c7415ac07a5ff4cd15b"></script>
+ <script src="dest/templates.js?rev=503c946756a27ef6cb5c3630a5029483"></script>
 
 
 
