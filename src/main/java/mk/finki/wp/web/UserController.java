@@ -194,7 +194,10 @@ public class UserController {
 	 {
 		User user = new User();
 		user =  userService.createUser(fname, lname, username, password, biography, "default.jpg");
-       
+		
+		if(user == null)
+			return null;
+		
 		if (file != null && !file.isEmpty()) {
 			
             try {

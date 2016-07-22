@@ -73,6 +73,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User createUser(String fname, String lname, String username, String password, String biography,
 			String image) {
+		
+		User userExist = findUsersByUsername(username);
+		if(userExist != null)
+			return null;
+		
 		User user = new User();
 		user.setBiography(biography);
 		user.setFname(fname);
@@ -134,8 +139,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findUsersByUsername(String username) {
+		List<User> users = userRepo.findByUsername(username);
+		if(users.size() > 0){
+			return users.get(0);
+		}
 		
-		return userRepo.findByUsername(username).get(0);
+		return null;
+	
 	}
 	public List<String> findAllUsernames(){
 		return userRepo.findAllUsernames();
