@@ -10,7 +10,7 @@
         <div class="col-md-5">
             <input class="form-control" ng-model="user.username" ng-minlength="3" ng-maxlength="15" name="username" type="text" required /> 
              <p ng-show="form.username.$error.minlength" class="help-block">Username to short.</p>
-             <p class="help-block has-error" id="userTaken" hidden>Uername already TAKEN !!!!</p>
+             <p class="help-block has-error" id="userTaken" hidden>Uername already TAKEN !</p>
              <p ng-show="form.username.$error.maxlength" class="help-block">Username to long.</p>
              <p ng-show="form.username.$invalid && !form.username.$pristine" class="help-block">Enter a username.</p>
         </div> 
