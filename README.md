@@ -1,5 +1,5 @@
 # WP-Project-Books hello
-Prva Verzija
+Java Spring MVC & Angular JS 
 
 Proekt po WebProgramiranje 
 
